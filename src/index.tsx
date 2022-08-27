@@ -1,6 +1,7 @@
-import 'index.css';
-import { App } from 'App';
+import { App } from 'components/App';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { reportWebVitals } from 'report-web-vitals';
+import { theme } from 'theme';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -10,7 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
 );
 
