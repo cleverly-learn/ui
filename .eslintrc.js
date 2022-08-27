@@ -39,6 +39,8 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
 
+    'react/function-component-definition': OFF,
+
     'class-methods-use-this': OFF,
 
     'unused-imports/no-unused-imports': WARN,
