@@ -1,4 +1,4 @@
-import { GoogleLogin } from 'components/_common/google-button.styled';
+import { GoogleLogin } from 'components/_common/GoogleButton/styled';
 import React, { FC } from 'react';
 
 interface Props {
