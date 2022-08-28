@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { LinearProgress } from '@mui/material';
+import { TopProgress } from 'components/_common/TopProgress';
 import React, { FC, Suspense } from 'react';
 
 const Login = React.lazy(() => import('components/Login/Login'));
@@ -10,7 +10,7 @@ export const App: FC = () => (
       <Route
         path="/login"
         element={
-          <Suspense fallback={<LinearProgress />}>
+          <Suspense fallback={<TopProgress />}>
             <Login />
           </Suspense>
         }
