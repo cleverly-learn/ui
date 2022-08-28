@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ReportHandler } from 'web-vitals';
 
 export function reportWebVitals(onPerfEntry?: ReportHandler) {
