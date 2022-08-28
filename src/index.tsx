@@ -1,5 +1,8 @@
 import { App } from 'components/App';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { queryClient } from 'query-client';
 import { reportWebVitals } from 'report-web-vitals';
 import { theme } from 'theme';
 import React from 'react';
@@ -11,10 +14,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </React.StrictMode>,
 );
 
