@@ -1,4 +1,5 @@
 import { Box, Button, Paper, TextField } from '@mui/material';
+import { GoogleButton } from 'components/_common/GoogleButton';
 import React, { FC } from 'react';
 import logo from 'assets/icons/logo.svg';
 
@@ -15,7 +16,10 @@ export const Login: FC = () => {
         >
           <TextField size="small" label="Логін" sx={{ mb: 1 }} />
           <TextField size="small" label="Пароль" sx={{ mb: 2 }} />
-          <Button variant="contained">Увійти</Button>
+          <Button variant="contained" sx={{ mb: 3 }}>
+            Увійти
+          </Button>
+          <GoogleButton text="Увійти через Google" />
         </Paper>
       </Box>
     </Box>

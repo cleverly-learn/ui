@@ -40,6 +40,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': OFF,
 
     'react/function-component-definition': OFF,
+    'react/require-default-props': OFF,
 
     'class-methods-use-this': OFF,
 
