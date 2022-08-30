@@ -43,6 +43,12 @@ module.exports = {
 
     'react/function-component-definition': OFF,
     'react/require-default-props': OFF,
+    'react/jsx-props-no-spreading': [
+      WARN,
+      {
+        custom: 'ignore',
+      },
+    ],
 
     'class-methods-use-this': OFF,
 

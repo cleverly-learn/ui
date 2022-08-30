@@ -1,16 +1,24 @@
 import { Box, Button, Paper, TextField } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { FormData } from 'components/Login/types/form-data.interface';
 import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
 import { Navigate } from 'react-router-dom';
 import { TopProgress } from 'components/_common/TopProgress';
+import { schema } from 'components/Login/schema';
 import { useLoginMutation } from 'components/Login/feature/mutations/use-login-mutation';
-import React, { FC, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { FC } from 'react';
 import logo from 'assets/icons/logo.svg';
 
 const Login: FC = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-
-  const { mutate, isLoading, isSuccess } = useLoginMutation();
+  const { mutate, isLoading, isSuccess, error } = useLoginMutation();
+  const { control, handleSubmit } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      login: '',
+      password: '',
+    },
+  });
 
   if (isSuccess) {
     return <Navigate to="/profile" />;
@@ -27,31 +35,49 @@ const Login: FC = () => {
           elevation={0}
           sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}
         >
-          <TextField
-            size="small"
-            label="Логін"
-            sx={{ mb: 1 }}
-            value={login}
-            onChange={(event) => setLogin(event.target.value)}
-            disabled={isLoading}
-          />
-          <TextField
-            size="small"
-            label="Пароль"
-            type="password"
-            sx={{ mb: 2 }}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            disabled={isLoading}
-          />
-          <Button
-            variant="contained"
-            sx={{ mb: 3 }}
-            onClick={() => mutate({ login, password })}
-            disabled={isLoading}
-          >
-            Увійти
-          </Button>
+          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+          <form onSubmit={handleSubmit((data) => mutate(data))}>
+            <Controller
+              name="login"
+              control={control}
+              render={({ field, fieldState }) => (
+                <TextField
+                  size="small"
+                  label="Логін"
+                  sx={{ mb: 1 }}
+                  disabled={isLoading}
+                  error={Boolean(fieldState.error) || Boolean(error)}
+                  helperText={fieldState.error?.message}
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field, fieldState }) => (
+                <TextField
+                  size="small"
+                  label="Пароль"
+                  type="password"
+                  sx={{ mb: 2 }}
+                  disabled={isLoading}
+                  error={Boolean(fieldState.error) || Boolean(error)}
+                  helperText={fieldState.error?.message}
+                  {...field}
+                />
+              )}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mb: 3 }}
+              disabled={isLoading}
+              fullWidth
+            >
+              Увійти
+            </Button>
+          </form>
           <GoogleButton text="Увійти через Google" disabled={isLoading} />
         </Paper>
       </Box>
