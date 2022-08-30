@@ -49,6 +49,7 @@ module.exports = {
         custom: 'ignore',
       },
     ],
+    'react/jsx-no-useless-fragment': [ERROR, { allowExpressions: true }],
 
     'class-methods-use-this': OFF,
 

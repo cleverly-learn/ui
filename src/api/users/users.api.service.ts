@@ -1,7 +1,7 @@
-import { ApiService } from 'api/api.service';
+import { AuthorizedApiService } from 'api/authorized-api.service';
 import { User } from 'api/users/types/user.interface';
 
-class UsersApiService extends ApiService {
+class UsersApiService extends AuthorizedApiService {
   constructor() {
     super('users');
   }
