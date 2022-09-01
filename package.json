@@ -34,8 +34,8 @@
     "prepare": "husky install",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "test": "jest",
     "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings=0 --fix"
   },
   "eslintConfig": {
@@ -73,7 +73,8 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.8"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": "eslint --max-warnings=0 --fix"

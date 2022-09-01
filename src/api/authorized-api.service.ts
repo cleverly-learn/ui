@@ -5,6 +5,8 @@ import { differenceInSeconds, subSeconds } from 'date-fns';
 import { localStorage } from 'utils/local-storage';
 
 export class AuthorizedApiService extends ApiService {
+  private static SECONDS_DIFF_TO_EXPIRE = 15;
+
   constructor(path: string) {
     super(path);
 
@@ -29,7 +31,16 @@ export class AuthorizedApiService extends ApiService {
 
     const { exp } = decodeJwt(accessToken);
 
-    if (exp && this.isTokenNotExpired(subSeconds(new Date(exp * 1000), 15))) {
+    if (!exp) {
+      throw new Error('Token must have an expiration date');
+    }
+
+    const expiredAtEarlier = subSeconds(
+      new Date(exp * 1000),
+      AuthorizedApiService.SECONDS_DIFF_TO_EXPIRE,
+    );
+
+    if (this.isTokenNotExpired(expiredAtEarlier)) {
       return accessToken;
     }
 
