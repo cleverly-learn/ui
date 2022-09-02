@@ -31,10 +31,7 @@ const Login: FC = () => {
         <Box display="flex" width={1} mx="auto" mb={2} justifyContent="center">
           <img src={logo} alt="logo" />
         </Box>
-        <Paper
-          elevation={0}
-          sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}
-        >
+        <Paper sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}>
           {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit((data) => mutate(data))}>
             <Controller
