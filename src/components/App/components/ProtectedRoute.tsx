@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { Navigate } from 'react-router-dom';
+import { Path } from 'components/App/enums/path.enum';
 import { localStorage } from 'utils/local-storage';
 import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';
 import React, { FC, PropsWithChildren } from 'react';
@@ -11,7 +12,7 @@ export const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
     !isLoading && (error as AxiosError)?.response?.status === 401;
 
   if (!localStorage.accessToken || isUnauthorized) {
-    return <Navigate to="/login" />;
+    return <Navigate to={Path.LOGIN} />;
   }
 
   return <>{children}</>;

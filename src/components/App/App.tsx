@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Path } from 'components/App/enums/path.enum';
 import { ProtectedRoute } from 'components/App/components/ProtectedRoute';
 import { TopProgress } from 'components/_common/TopProgress';
 import React, { FC, Suspense } from 'react';
@@ -11,9 +12,9 @@ const MainWrapper = React.lazy(
 export const App: FC = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Navigate to="/profile" />} />
+      <Route path="/" element={<Navigate to={Path.STUDENTS} />} />
       <Route
-        path="/login"
+        path={Path.LOGIN}
         element={
           <Suspense fallback={<TopProgress />}>
             <Login />

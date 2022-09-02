@@ -7,9 +7,12 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Skeleton,
 } from '@mui/material';
 import { Navigate } from 'react-router-dom';
-import { Role } from 'enums/role.enum';
+import { Path } from 'components/App/enums/path.enum';
+import { TopProgress } from 'components/_common/TopProgress';
+import { isAdmin } from 'enums/role.enum';
 import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';
 import { useLogoutMutation } from 'components/MainWrapper/components/Header/feature/mutations/use-logout-mutation';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -35,13 +38,14 @@ export const Header: FC = () => {
   };
 
   if (isLogoutSuccess) {
-    return <Navigate to="/login" />;
+    return <Navigate to={Path.LOGIN} />;
   }
 
   return (
     <Box display="flex" alignItems="center">
+      {isUserLoading && <TopProgress />}
       <BackdropTopProgress open={isLogoutLoading} />
-      {user?.role === Role.ADMIN && (
+      {user && isAdmin(user.role) && (
         <Chip color="secondary" variant="outlined" label="Адміністратор" />
       )}
       <Button
@@ -52,7 +56,11 @@ export const Header: FC = () => {
         endIcon={<AccountCircleIcon />}
         onClick={onClickUser}
       >
-        {user?.lastName} {user?.firstName} {user?.patronymic}
+        {user ? (
+          `${user.lastName} ${user.firstName} ${user.patronymic}`
+        ) : (
+          <Skeleton variant="text" width={200} />
+        )}
       </Button>
       <Menu
         open={Boolean(menuAnchor)}

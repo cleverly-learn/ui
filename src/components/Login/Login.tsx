@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
 import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
 import { Navigate } from 'react-router-dom';
+import { Path } from 'components/App/enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import { schema } from 'components/Login/schema';
 import { useLoginMutation } from 'components/Login/feature/mutations/use-login-mutation';
@@ -21,7 +22,7 @@ const Login: FC = () => {
   });
 
   if (isSuccess) {
-    return <Navigate to="/profile" />;
+    return <Navigate to={Path.STUDENTS} />;
   }
 
   return (
@@ -31,7 +32,10 @@ const Login: FC = () => {
         <Box display="flex" width={1} mx="auto" mb={2} justifyContent="center">
           <img src={logo} alt="logo" />
         </Box>
-        <Paper sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}>
+        <Paper
+          elevation={0}
+          sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}
+        >
           {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit((data) => mutate(data))}>
             <Controller

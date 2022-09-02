@@ -23,9 +23,6 @@ export const theme = createTheme({
           borderRadius: 10,
         },
       },
-      defaultProps: {
-        elevation: 0,
-      },
     },
     MuiOutlinedInput: {
       styleOverrides: {
@@ -38,6 +35,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 10,
+          textTransform: 'none',
         },
       },
     },
