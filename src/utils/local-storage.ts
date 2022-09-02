@@ -3,14 +3,22 @@ class LocalStorage {
 
   private static REFRESH_TOKEN = 'refreshToken';
 
+  private setValue(key: string, value: string | null): void {
+    if (value) {
+      window.localStorage.setItem(key, value);
+      return;
+    }
+    if (value === null) {
+      window.localStorage.removeItem(key);
+    }
+  }
+
   get accessToken() {
     return window.localStorage.getItem(LocalStorage.ACCESS_TOKEN);
   }
 
   set accessToken(value: string | null) {
-    if (value) {
-      window.localStorage.setItem(LocalStorage.ACCESS_TOKEN, value);
-    }
+    this.setValue(LocalStorage.ACCESS_TOKEN, value);
   }
 
   get refreshToken() {
@@ -18,9 +26,7 @@ class LocalStorage {
   }
 
   set refreshToken(value: string | null) {
-    if (value) {
-      window.localStorage.setItem(LocalStorage.REFRESH_TOKEN, value);
-    }
+    this.setValue(LocalStorage.REFRESH_TOKEN, value);
   }
 }
 

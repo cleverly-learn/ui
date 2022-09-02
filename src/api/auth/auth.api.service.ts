@@ -15,6 +15,10 @@ class AuthApiService extends ApiService {
       .post<TokenPair>('refresh', payload)
       .then(({ data }) => data);
   }
+
+  async revokeRefreshToken(payload: { refreshToken: string }): Promise<void> {
+    await this.api.post('revoke', payload);
+  }
 }
 
 export const authApiService = new AuthApiService();
