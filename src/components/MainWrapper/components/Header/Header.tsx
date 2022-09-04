@@ -10,7 +10,7 @@ import {
   Skeleton,
 } from '@mui/material';
 import { Navigate } from 'react-router-dom';
-import { Path } from 'components/App/enums/path.enum';
+import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import { isAdmin } from 'enums/role.enum';
 import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';

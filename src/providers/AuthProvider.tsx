@@ -1,11 +1,11 @@
 import { AxiosError } from 'axios';
 import { Navigate } from 'react-router-dom';
-import { Path } from 'components/App/enums/path.enum';
+import { Path } from 'enums/path.enum';
 import { localStorage } from 'utils/local-storage';
 import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';
 import React, { FC, PropsWithChildren } from 'react';
 
-export const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
+export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { isLoading, error } = useCurrentUserQuery();
 
   const isUnauthorized =

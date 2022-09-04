@@ -1,6 +1,6 @@
+import { AuthProvider } from 'providers/AuthProvider';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { Path } from 'components/App/enums/path.enum';
-import { ProtectedRoute } from 'components/App/components/ProtectedRoute';
+import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import React, { FC, Suspense } from 'react';
 
@@ -21,13 +21,14 @@ export const App: FC = () => (
           </Suspense>
         }
       />
-      <Route path={Path.NOT_FOUND} element={<div>Page not found</div>} />
       <Route
         path="/*"
         element={
-          <ProtectedRoute>
-            <MainWrapper />
-          </ProtectedRoute>
+          <Suspense fallback={<TopProgress />}>
+            <AuthProvider>
+              <MainWrapper />
+            </AuthProvider>
+          </Suspense>
         }
       />
     </Routes>

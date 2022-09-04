@@ -1,4 +1,4 @@
-import { Path } from 'components/App/enums/path.enum';
+import { Path } from 'enums/path.enum';
 import { TabProps } from 'components/MainWrapper/components/Sidebar/types/tab-props.interface';
 import { createElement } from 'react';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';

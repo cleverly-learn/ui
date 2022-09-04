@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
 import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
 import { Navigate } from 'react-router-dom';
-import { Path } from 'components/App/enums/path.enum';
+import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import { schema } from 'components/Login/schema';
 import { useLoginMutation } from 'components/Login/feature/mutations/use-login-mutation';
