@@ -12,7 +12,7 @@ const MainWrapper = React.lazy(
 export const App: FC = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Navigate to={Path.STUDENTS} />} />
+      <Route path="/" element={<Navigate to={Path.PROFILE} />} />
       <Route
         path={Path.LOGIN}
         element={
@@ -21,6 +21,7 @@ export const App: FC = () => (
           </Suspense>
         }
       />
+      <Route path={Path.NOT_FOUND} element={<div>Page not found</div>} />
       <Route
         path="/*"
         element={
