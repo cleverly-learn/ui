@@ -22,18 +22,18 @@ const Login: FC = () => {
   });
 
   if (isSuccess) {
-    return <Navigate to={Path.STUDENTS} />;
+    return <Navigate to={Path.PROFILE} />;
   }
 
   return (
-    <Box height="100vh">
+    <div>
       {isLoading && <TopProgress />}
       <Box mx="auto" mt="15%" width={300}>
         <Box display="flex" width={1} mx="auto" mb={2} justifyContent="center">
           <img src={logo} alt="logo" />
         </Box>
         <Paper
-          elevation={0}
+          // elevation={0}
           sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}
         >
           {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
@@ -82,7 +82,7 @@ const Login: FC = () => {
           <GoogleButton text="Увійти через Google" disabled={isLoading} />
         </Paper>
       </Box>
-    </Box>
+    </div>
   );
 };
 

@@ -74,7 +74,7 @@ export const Header: FC = () => {
           horizontal: 'right',
           vertical: 'top',
         }}
-        PaperProps={{ sx: { mt: 1 } }}
+        PaperProps={{ sx: { mt: 0.5 } }}
       >
         <MenuItem onClick={() => logout()}>
           <ListItemIcon>
