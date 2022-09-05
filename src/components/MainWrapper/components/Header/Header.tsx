@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
-import { TopProgress } from 'components/_common/TopProgress';
 import { isAdmin } from 'enums/role.enum';
 import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';
 import { useLogoutMutation } from 'components/MainWrapper/components/Header/feature/mutations/use-logout-mutation';
@@ -43,7 +42,6 @@ export const Header: FC = () => {
 
   return (
     <Box display="flex" alignItems="center">
-      {isUserLoading && <TopProgress />}
       <BackdropTopProgress open={isLogoutLoading} />
       {user && isAdmin(user.role) && (
         <Chip color="secondary" variant="outlined" label="Адміністратор" />
