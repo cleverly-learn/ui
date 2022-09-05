@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { Header } from 'components/MainWrapper/components/Header/Header';
 import { Path } from 'enums/path.enum';
+import { Profile } from 'components/MainWrapper/components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import { Sidebar } from 'components/MainWrapper/components/Sidebar/Sidebar';
 import React, { FC } from 'react';
@@ -29,7 +30,7 @@ const MainWrapper: FC = () => {
           </Box>
           <Box flex={1}>
             <Routes>
-              <Route path={Path.PROFILE} element={Path.PROFILE} />
+              <Route path={Path.PROFILE} element={<Profile />} />
               <Route path={Path.STUDENTS} element={Path.STUDENTS} />
               <Route path={Path.LECTURERS} element={Path.LECTURERS} />
               <Route path={Path.GROUPS} element={Path.GROUPS} />
