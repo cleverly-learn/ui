@@ -8,7 +8,7 @@ interface Props {
 
 export const BackdropTopProgress: FC<Props> = ({ open }) => {
   return (
-    <Backdrop open={Boolean(open)} sx={{ zIndex: 1 }}>
+    <Backdrop open={Boolean(open)} sx={{ zIndex: 1501 }}>
       <TopProgress />
     </Backdrop>
   );
