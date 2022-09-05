@@ -40,6 +40,7 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
         <Box display="flex">
           <Grow in={open} timeout={getTransitionTimeout(0)}>
             <Button
+              size="large"
               variant="contained"
               color="secondary"
               onClick={onComplete}
@@ -49,7 +50,7 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
             </Button>
           </Grow>
           <Grow in={open} timeout={getTransitionTimeout(1)}>
-            <Button variant="contained" onClick={onComplete}>
+            <Button size="large" variant="contained" onClick={onComplete}>
               Зберегти
             </Button>
           </Grow>
