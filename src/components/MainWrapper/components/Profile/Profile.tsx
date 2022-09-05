@@ -1,5 +1,5 @@
 import { Edit } from 'components/MainWrapper/components/Profile/components/Edit/Edit';
-import { PaperPanel } from 'components/_common/PaperPanel/styled';
+import { PaperPanel } from 'components/_common/PaperPanel';
 import { View } from 'components/MainWrapper/components/Profile/components/View/View';
 import React, { FC, useState } from 'react';
 

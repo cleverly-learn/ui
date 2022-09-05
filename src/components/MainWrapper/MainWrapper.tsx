@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { Header } from 'components/MainWrapper/components/Header/Header';
+import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
 import { Profile } from 'components/MainWrapper/components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
@@ -31,10 +32,22 @@ const MainWrapper: FC = () => {
           <Box flex={1}>
             <Routes>
               <Route path={Path.PROFILE} element={<Profile />} />
-              <Route path={Path.STUDENTS} element={Path.STUDENTS} />
-              <Route path={Path.LECTURERS} element={Path.LECTURERS} />
-              <Route path={Path.GROUPS} element={Path.GROUPS} />
-              <Route path={Path.ADMINS} element={Path.ADMINS} />
+              <Route
+                path={Path.STUDENTS}
+                element={<PaperPanel>{Path.STUDENTS}</PaperPanel>}
+              />
+              <Route
+                path={Path.LECTURERS}
+                element={<PaperPanel>{Path.LECTURERS}</PaperPanel>}
+              />
+              <Route
+                path={Path.GROUPS}
+                element={<PaperPanel>{Path.GROUPS}</PaperPanel>}
+              />
+              <Route
+                path={Path.ADMINS}
+                element={<PaperPanel>{Path.ADMINS}</PaperPanel>}
+              />
             </Routes>
           </Box>
         </Box>
