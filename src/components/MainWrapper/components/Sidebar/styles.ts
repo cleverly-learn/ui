@@ -15,3 +15,14 @@ export const tab: SxProps<Theme> = (theme) => ({
     color: theme.palette.primary.contrastText,
   },
 });
+
+export const indicator: SxProps = {
+  width: 1,
+  zIndex: 0,
+  borderRadius: '10px',
+
+  '&.Mui-selected': {
+    color: '#fff',
+    width: '50px',
+  },
+};

@@ -13,16 +13,7 @@ export const Sidebar: FC = () => {
         orientation="vertical"
         value={pathname}
         TabIndicatorProps={{
-          sx: {
-            width: 1,
-            zIndex: 0,
-            borderRadius: '10px',
-
-            '&.Mui-selected': {
-              color: '#fff',
-              width: '50px',
-            },
-          },
+          sx: styles.indicator,
         }}
       >
         {tabs.map(({ to, label, icon }) => (
