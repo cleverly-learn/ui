@@ -12,8 +12,9 @@ import {
 import { Navigate } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
 import { isAdmin } from 'enums/role.enum';
-import { useCurrentUserQuery } from 'features/users/queries/use-current-user-query';
-import { useLogoutMutation } from 'components/MainWrapper/components/Header/feature/mutations/use-logout-mutation';
+import { useCurrentUser } from 'features/users/queries/use-current-user';
+import { useCurrentUserFullName } from 'features/users/queries/use-current-user-full-name';
+import { useLogout } from 'components/MainWrapper/components/Header/feature/mutations/use-logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React, { FC, MouseEvent, useState } from 'react';
@@ -21,12 +22,13 @@ import React, { FC, MouseEvent, useState } from 'react';
 export const Header: FC = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
-  const { data: user, isLoading: isUserLoading } = useCurrentUserQuery();
+  const { data: user, isLoading: isUserLoading } = useCurrentUser();
+  const fullName = useCurrentUserFullName();
   const {
     mutate: logout,
     isLoading: isLogoutLoading,
     isSuccess: isLogoutSuccess,
-  } = useLogoutMutation();
+  } = useLogout();
 
   const onClickUser = (event: MouseEvent<HTMLButtonElement>) => {
     setMenuAnchor(event.currentTarget);
@@ -54,11 +56,7 @@ export const Header: FC = () => {
         endIcon={<AccountCircleIcon />}
         onClick={onClickUser}
       >
-        {user ? (
-          `${user.lastName} ${user.firstName} ${user.patronymic}`
-        ) : (
-          <Skeleton variant="text" width={200} />
-        )}
+        {fullName ?? <Skeleton variant="text" width={200} />}
       </Button>
       <Menu
         open={Boolean(menuAnchor)}

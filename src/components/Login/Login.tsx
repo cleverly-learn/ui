@@ -6,13 +6,13 @@ import { Navigate } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import { schema } from 'components/Login/schema';
-import { useLoginMutation } from 'components/Login/feature/mutations/use-login-mutation';
+import { useLogin } from 'components/Login/feature/mutations/use-login';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
 import logo from 'assets/icons/logo.svg';
 
 const Login: FC = () => {
-  const { mutate, isLoading, isSuccess, error } = useLoginMutation();
+  const { mutate, isLoading, isSuccess, error } = useLogin();
   const { control, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
