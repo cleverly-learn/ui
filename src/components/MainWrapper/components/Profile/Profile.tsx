@@ -7,7 +7,7 @@ export const Profile: FC = () => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   return (
-    <PaperPanel sx={{ display: 'flex', flexDirection: 'column' }}>
+    <PaperPanel>
       {isEditMode ? (
         <Edit open={isEditMode} onComplete={() => setIsEditMode(false)} />
       ) : (

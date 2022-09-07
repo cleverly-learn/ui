@@ -1,5 +1,5 @@
 import * as styles from 'components/MainWrapper/components/Profile/components/View/styles';
-import { Fab, Grow, Skeleton, Typography, Zoom } from '@mui/material';
+import { Box, Fab, Grow, Skeleton, Typography, Zoom } from '@mui/material';
 import { Footer } from 'components/MainWrapper/components/Profile/components/Footer/Footer';
 import { PanelProps } from 'components/MainWrapper/components/Profile/types/panel-props.interface';
 import { useCurrentUserFullName } from 'features/users/queries/use-current-user-full-name';
@@ -10,7 +10,7 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
   const fullName = useCurrentUserFullName();
 
   return (
-    <>
+    <Box display="flex" flexDirection="column" height={1}>
       <Grow in={open}>
         <Typography variant="h3">
           {fullName ?? <Skeleton variant="text" width="40%" />}
@@ -24,6 +24,6 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
           </Fab>
         </Zoom>
       </Footer>
-    </>
+    </Box>
   );
 };
