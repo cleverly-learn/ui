@@ -60,8 +60,13 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <Form onSubmit={handleSubmit(({ newPassword }) => mutate(newPassword))}>
+      <Form
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onSubmit={(e) => {
+          e.stopPropagation();
+          return handleSubmit(({ newPassword }) => mutate(newPassword))(e);
+        }}
+      >
         <DialogContent
           sx={{
             display: 'flex',
