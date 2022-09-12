@@ -32,16 +32,20 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
   });
   const { mutate, isLoading, isSuccess } = useChangePassword();
 
+  const closeAndReset = () => {
+    onClose();
+    reset();
+  };
+
   useEffect(() => {
     if (isSuccess) {
-      onClose();
-      reset();
+      closeAndReset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (
-    <Dialog onClose={onClose} open={Boolean(open)}>
+    <Dialog onClose={closeAndReset} open={Boolean(open)}>
       <BackdropTopProgress open={isLoading} />
       <DialogTitle>
         Зміна паролю
@@ -51,7 +55,7 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
             right: 8,
             top: 8,
           }}
-          onClick={onClose}
+          onClick={closeAndReset}
         >
           <CloseIcon />
         </IconButton>
