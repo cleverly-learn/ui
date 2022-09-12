@@ -1,10 +1,19 @@
-import { Box, Button, Paper, TextField } from '@mui/material';
+import { AxiosError } from 'axios';
+import {
+  Box,
+  Button,
+  FormHelperText,
+  Paper,
+  TextField,
+  Zoom,
+} from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
 import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
 import { Navigate } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
+import { isUnauthorized } from 'utils/http/is-unauthorized';
 import { schema } from 'components/Login/schema';
 import { useLogin } from 'components/Login/feature/mutations/use-login';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +21,7 @@ import React, { FC } from 'react';
 import logo from 'assets/icons/logo.svg';
 
 const Login: FC = () => {
-  const { mutate, isLoading, isSuccess, error } = useLogin();
+  const { mutate, isLoading, isSuccess, isError, error } = useLogin();
   const { control, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -47,7 +56,7 @@ const Login: FC = () => {
                   label="Логін"
                   sx={{ mb: 1 }}
                   disabled={isLoading}
-                  error={Boolean(fieldState.error) || Boolean(error)}
+                  error={Boolean(fieldState.error) || isError}
                   helperText={fieldState.error?.message}
                   {...field}
                 />
@@ -63,7 +72,7 @@ const Login: FC = () => {
                   type="password"
                   sx={{ mb: 2 }}
                   disabled={isLoading}
-                  error={Boolean(fieldState.error) || Boolean(error)}
+                  error={Boolean(fieldState.error) || isError}
                   helperText={fieldState.error?.message}
                   {...field}
                 />
@@ -72,14 +81,22 @@ const Login: FC = () => {
             <Button
               type="submit"
               variant="contained"
-              sx={{ mb: 3 }}
               disabled={isLoading}
               fullWidth
             >
               Увійти
             </Button>
+            {isError && (
+              <Zoom in={isUnauthorized(error as AxiosError)}>
+                <FormHelperText error>
+                  Неправильний логін або пароль
+                </FormHelperText>
+              </Zoom>
+            )}
           </form>
-          <GoogleButton text="Увійти через Google" disabled={isLoading} />
+          <Box mt={3}>
+            <GoogleButton text="Увійти через Google" disabled={isLoading} />
+          </Box>
         </Paper>
       </Box>
     </div>
