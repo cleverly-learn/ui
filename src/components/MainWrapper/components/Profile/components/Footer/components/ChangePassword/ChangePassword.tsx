@@ -1,0 +1,112 @@
+import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  TextField,
+} from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { Form } from 'components/_common/Html/styled';
+import { FormData } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
+import { schema } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/schema';
+import { useChangePassword } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
+import { yupResolver } from '@hookform/resolvers/yup';
+import CloseIcon from '@mui/icons-material/Close';
+import React, { FC, useEffect } from 'react';
+
+interface Props {
+  open?: boolean;
+  onClose(): void;
+}
+
+export const ChangePassword: FC<Props> = ({ open, onClose }) => {
+  const { control, handleSubmit, reset } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      newPassword: '',
+      repeatNewPassword: '',
+    },
+  });
+  const { mutate, isLoading, isSuccess } = useChangePassword();
+
+  useEffect(() => {
+    if (isSuccess) {
+      onClose();
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
+
+  return (
+    <Dialog onClose={onClose} open={Boolean(open)}>
+      <BackdropTopProgress open={isLoading} />
+      <DialogTitle>
+        Зміна паролю
+        <IconButton
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+          }}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+      <Form onSubmit={handleSubmit(({ newPassword }) => mutate(newPassword))}>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            px: 6,
+          }}
+        >
+          <Controller
+            name="newPassword"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                size="small"
+                type="password"
+                sx={{ mb: 1 }}
+                label="Новий пароль"
+                error={Boolean(fieldState.error)}
+                helperText={fieldState.error?.message}
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            name="repeatNewPassword"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                size="small"
+                type="password"
+                label="Повторіть пароль"
+                error={Boolean(fieldState.error)}
+                helperText={fieldState.error?.message}
+                {...field}
+              />
+            )}
+          />
+        </DialogContent>
+        <DialogActions
+          sx={{
+            px: 6,
+            pb: 3,
+          }}
+        >
+          <Button type="submit" variant="contained" fullWidth>
+            Підтвердити
+          </Button>
+        </DialogActions>
+      </Form>
+    </Dialog>
+  );
+};
