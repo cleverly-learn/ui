@@ -2,15 +2,16 @@ import { Role } from 'enums/role.enum';
 
 export interface User {
   id: number;
-  email: string | null;
+  login: string;
+  email: string;
   isRegistered: boolean;
   role: Role;
   firstName: string;
   lastName: string;
   patronymic: string;
-  phone: string | null;
-  telegram: string | null;
-  details?: string;
+  phone: string;
+  telegram: string;
+  details: string;
   scheduleId?: string;
   year?: number;
 }
