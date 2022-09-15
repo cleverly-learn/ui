@@ -10,7 +10,7 @@ export interface User {
   patronymic: string;
   phone: string | null;
   telegram: string | null;
-  details: string | null;
-  scheduleId: string | null;
-  year: number | null;
+  details?: string;
+  scheduleId?: string;
+  year?: number;
 }
