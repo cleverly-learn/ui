@@ -1,3 +1,4 @@
+import { Admins } from 'components/Dashboard/components/Admins/Admins';
 import { Box } from '@mui/material';
 import { Header } from 'components/Dashboard/components/Header/Header';
 import { PaperPanel } from 'components/_common/PaperPanel';
@@ -44,10 +45,7 @@ const Dashboard: FC = () => {
                 path={Path.GROUPS}
                 element={<PaperPanel>{Path.GROUPS}</PaperPanel>}
               />
-              <Route
-                path={Path.ADMINS}
-                element={<PaperPanel>{Path.ADMINS}</PaperPanel>}
-              />
+              <Route path={Path.ADMINS} element={<Admins />} />
             </Routes>
           </Box>
         </Box>
