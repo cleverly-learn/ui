@@ -1,4 +1,4 @@
-import { useCurrentUser } from 'features/users/queries/use-current-user';
+import { useCurrentUser } from 'hooks/queries/use-current-user';
 
 export function useCurrentUserFullName(): string | null {
   const { data } = useCurrentUser();

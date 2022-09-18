@@ -2,7 +2,7 @@ import * as styles from 'components/Dashboard/components/Profile/components/View
 import { Box, Fab, Grow, Skeleton, Typography, Zoom } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
-import { useCurrentUserFullName } from 'features/users/queries/use-current-user-full-name';
+import { useCurrentUserFullName } from 'hooks/queries/use-current-user-full-name';
 import EditIcon from '@mui/icons-material/Edit';
 import React, { FC } from 'react';
 

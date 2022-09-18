@@ -6,7 +6,7 @@ import { Form } from 'components/_common/Html/styled';
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
-import { useCurrentUser } from 'features/users/queries/use-current-user';
+import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useEditUser } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-user';
 import React, { FC } from 'react';
 

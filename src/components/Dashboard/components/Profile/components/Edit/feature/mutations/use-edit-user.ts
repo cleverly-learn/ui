@@ -1,4 +1,4 @@
-import { USE_CURRENT_USER_KEYS } from 'features/users/queries/use-current-user';
+import { USE_CURRENT_USER_KEYS } from 'hooks/queries/use-current-user';
 import { User } from 'api/users/types/user.interface';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
