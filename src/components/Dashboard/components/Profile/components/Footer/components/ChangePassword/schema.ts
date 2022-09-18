@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { FormData } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
+import { FormData } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
 
 export const schema: yup.SchemaOf<FormData> = yup.object({
   newPassword: yup.string().trim().required('Пароль не може бути пустим'),

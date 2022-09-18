@@ -1,5 +1,5 @@
 import { Path } from 'enums/path.enum';
-import { TabProps } from 'components/MainWrapper/components/Sidebar/types/tab-props.interface';
+import { TabProps } from 'components/Dashboard/components/Sidebar/types/tab-props.interface';
 import { createElement } from 'react';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import GroupsIcon from '@mui/icons-material/Groups';

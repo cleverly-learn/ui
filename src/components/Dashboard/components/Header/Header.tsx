@@ -14,7 +14,7 @@ import { Path } from 'enums/path.enum';
 import { isAdmin } from 'enums/role.enum';
 import { useCurrentUser } from 'features/users/queries/use-current-user';
 import { useCurrentUserFullName } from 'features/users/queries/use-current-user-full-name';
-import { useLogout } from 'components/MainWrapper/components/Header/feature/mutations/use-logout';
+import { useLogout } from 'components/Dashboard/components/Header/feature/mutations/use-logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React, { FC, MouseEvent, useState } from 'react';

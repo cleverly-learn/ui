@@ -1,13 +1,13 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import { Box, Button, Grow, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { Footer } from 'components/MainWrapper/components/Profile/components/Footer/Footer';
+import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
 import { Form } from 'components/_common/Html/styled';
-import { FormData } from 'components/MainWrapper/components/Profile/components/Edit/types/form-data.interface';
-import { PanelProps } from 'components/MainWrapper/components/Profile/types/panel-props.interface';
-import { getTransitionTimeout } from 'components/MainWrapper/components/Profile/utils/get-transition-timeout';
+import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
+import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
+import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { useCurrentUser } from 'features/users/queries/use-current-user';
-import { useEditUser } from 'components/MainWrapper/components/Profile/components/Edit/feature/mutations/use-edit-user';
+import { useEditUser } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-user';
 import React, { FC } from 'react';
 
 export const Edit: FC<PanelProps> = ({ open, onComplete }) => {

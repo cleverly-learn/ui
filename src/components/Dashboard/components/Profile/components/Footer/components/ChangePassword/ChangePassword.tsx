@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Form } from 'components/_common/Html/styled';
-import { FormData } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
-import { schema } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/schema';
-import { useChangePassword } from 'components/MainWrapper/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
+import { FormData } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
+import { schema } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/schema';
+import { useChangePassword } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
 import React, { FC, useEffect } from 'react';

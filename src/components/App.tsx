@@ -5,9 +5,7 @@ import { TopProgress } from 'components/_common/TopProgress';
 import React, { FC, Suspense } from 'react';
 
 const Login = React.lazy(() => import('components/Login/Login'));
-const MainWrapper = React.lazy(
-  () => import('components/MainWrapper/MainWrapper'),
-);
+const Dashboard = React.lazy(() => import('components/Dashboard/Dashboard'));
 
 export const App: FC = () => (
   <BrowserRouter>
@@ -26,7 +24,7 @@ export const App: FC = () => (
         element={
           <Suspense fallback={<TopProgress />}>
             <AuthProvider>
-              <MainWrapper />
+              <Dashboard />
             </AuthProvider>
           </Suspense>
         }
