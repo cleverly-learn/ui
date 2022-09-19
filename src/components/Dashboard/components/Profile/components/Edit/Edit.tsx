@@ -12,7 +12,7 @@ import React, { FC } from 'react';
 
 export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
   const { data: user } = useCurrentUser();
-  const { mutate, isLoading, isSuccess } = useEditProfile();
+  const { mutate, isLoading } = useEditProfile();
 
   const { handleSubmit, control } = useForm<FormData>({
     defaultValues: {
@@ -22,15 +22,11 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
     },
   });
 
-  if (isSuccess) {
-    onComplete();
-  }
-
   return (
     <Form
       sx={{ display: 'flex', flexDirection: 'column', height: 1 }}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={handleSubmit((data) => mutate(data))}
+      onSubmit={handleSubmit((data) => mutate(data, { onSuccess: onComplete }))}
     >
       {isLoading && <BackdropTopProgress />}
       <Box display="flex" mt={2}>

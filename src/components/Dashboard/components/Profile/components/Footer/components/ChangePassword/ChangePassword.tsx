@@ -15,7 +15,7 @@ import { schema } from 'components/Dashboard/components/Profile/components/Foote
 import { useChangePassword } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 interface Props {
   open?: boolean;
@@ -30,19 +30,12 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
       repeatNewPassword: '',
     },
   });
-  const { mutate, isLoading, isSuccess } = useChangePassword();
+  const { mutate, isLoading } = useChangePassword();
 
   const closeAndReset = () => {
     onClose();
     reset();
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      closeAndReset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
 
   return (
     <Dialog onClose={closeAndReset} open={Boolean(open)}>
@@ -64,7 +57,9 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={(e) => {
           e.stopPropagation();
-          return handleSubmit(({ newPassword }) => mutate(newPassword))(e);
+          return handleSubmit(({ newPassword }) =>
+            mutate(newPassword, { onSuccess: closeAndReset }),
+          )(e);
         }}
       >
         <DialogContent

@@ -1,4 +1,6 @@
 import * as styles from 'components/Dashboard/components/Admins/styles';
+import { Box } from '@mui/material';
+import { Create } from 'components/Dashboard/components/Admins/components/Create/Create';
 import { DEFAULT_PAGE_SIZE } from 'components/Dashboard/components/Admins/constants';
 import {
   DataGrid,
@@ -146,7 +148,10 @@ export const Admins: FC = () => {
   };
 
   return (
-    <PaperPanel>
+    <PaperPanel sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box mb={2}>
+        <Create />
+      </Box>
       <DataGrid
         paginationMode="server"
         editMode="row"
