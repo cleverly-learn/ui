@@ -3,7 +3,7 @@ import { User } from 'api/users/types/user.interface';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
 
-export const useEditUser = () => {
+export function useEditUser() {
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -21,4 +21,4 @@ export const useEditUser = () => {
       },
     },
   );
-};
+}

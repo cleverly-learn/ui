@@ -2,7 +2,7 @@ import { authApiService } from 'api/auth/auth.api.service';
 import { localStorage } from 'utils/local-storage';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useLogout = () => {
+export function useLogout() {
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -20,4 +20,4 @@ export const useLogout = () => {
       },
     },
   );
-};
+}

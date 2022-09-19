@@ -3,8 +3,10 @@ import { Role } from 'enums/role.enum';
 import { useAuthorizedQuery } from 'hooks/use-authorized-query';
 import { usersApiService } from 'api/users/users.api.service';
 
+export const ADMINS_KEY = 'admins';
+
 const getUseAdminsKeys = ({ page, size }: Required<Pageable>) => [
-  'admins',
+  ADMINS_KEY,
   size,
   page,
 ];
