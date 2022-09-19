@@ -14,6 +14,7 @@ import { User } from 'api/users/types/user.interface';
 import { useAdminsPage } from 'components/Dashboard/components/Admins/feature/queries/use-admins';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useDeleteUser } from 'hooks/mutations/use-delete-user';
+import { useEditAdmin } from 'components/Dashboard/components/Admins/feature/mutations/use-edit-admin';
 import CancelIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
@@ -31,48 +32,22 @@ export const Admins: FC = () => {
     page,
   });
   const { mutate: deleteAdmin, isLoading: isDeleteLoading } = useDeleteUser();
+  const { mutate: edit, isLoading: isEditLoading } = useEditAdmin({
+    page,
+    size: pageSize,
+  });
 
   const [totalRows, setTotalRows] = useState(data?.totalElements ?? 0);
 
-  const isLoading = isUserLoading || isAdminsLoading || isDeleteLoading;
+  const isLoading =
+    isUserLoading || isAdminsLoading || isDeleteLoading || isEditLoading;
 
   useEffect(() => {
     setTotalRows((prevState) => data?.totalElements ?? prevState);
   }, [data?.totalElements]);
 
-  const handleEdit = (id: number) => () => {
-    setRowModesModel({ [id]: { mode: GridRowModes.Edit } });
-  };
-
-  const handleDelete = (id: number) => () => {
-    deleteAdmin(id);
-    // setRows(rows.filter((row) => row.id !== id));
-  };
-
-  const handleSave = (id: number) => () => {
-    setRowModesModel({ [id]: { mode: GridRowModes.View } });
-  };
-
-  const handleCancel = (id: number) => () => {
-    setRowModesModel({
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
-
-    // TODO: For creating new
-    // const editedRow = rows.find((row) => row.id === id);
-    // if (editedRow.isNew) {
-    //   setRows(rows.filter((row) => row.id !== id));
-    // }
-  };
-
-  const processRowUpdate = (newRow: User) => {
-    const updatedRow = { ...newRow, isNew: false };
-
-    // setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    return updatedRow;
-  };
-
   const columns: GridColumns = [
+    { field: 'id', headerName: 'ID', width: 70 },
     { field: 'login', headerName: 'Логін', width: 150 },
     {
       field: 'password',
@@ -119,12 +94,18 @@ export const Admins: FC = () => {
             <GridActionsCellItem
               icon={<SaveIcon />}
               label="Save"
-              onClick={handleSave(id)}
+              onClick={() =>
+                setRowModesModel({ [id]: { mode: GridRowModes.View } })
+              }
             />,
             <GridActionsCellItem
               icon={<CancelIcon />}
               label="Cancel"
-              onClick={handleCancel(id)}
+              onClick={() =>
+                setRowModesModel({
+                  [id]: { mode: GridRowModes.View, ignoreModifications: true },
+                })
+              }
             />,
           ];
         }
@@ -133,17 +114,36 @@ export const Admins: FC = () => {
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
-            onClick={handleEdit(id)}
+            onClick={() =>
+              setRowModesModel({ [id]: { mode: GridRowModes.Edit } })
+            }
           />,
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={handleDelete(id)}
+            onClick={() => deleteAdmin(id)}
           />,
         ];
       },
     },
   ];
+
+  const processRowUpdate = ({
+    password,
+    ...newRow
+  }: User & { password?: string }) => {
+    const { id, firstName, lastName, patronymic } = newRow;
+
+    edit({
+      id,
+      firstName,
+      lastName,
+      patronymic,
+      password: password?.trim() || undefined,
+    });
+
+    return newRow;
+  };
 
   return (
     <PaperPanel>
@@ -164,16 +164,6 @@ export const Admins: FC = () => {
           params.row.id !== user?.id
         }
         isRowSelectable={(params) => params.row.id !== user?.id}
-        onRowEditStart={(params, event) => {
-          // TODO: Check on create
-          // eslint-disable-next-line no-param-reassign
-          event.defaultMuiPrevented = true;
-        }}
-        onRowEditStop={(params, event) => {
-          // TODO: Check on create
-          // eslint-disable-next-line no-param-reassign
-          event.defaultMuiPrevented = true;
-        }}
         processRowUpdate={processRowUpdate}
         sx={styles.dataGrid}
         getRowClassName={(params) =>

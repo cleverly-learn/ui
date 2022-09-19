@@ -7,12 +7,12 @@ import { FormData } from 'components/Dashboard/components/Profile/components/Edi
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
-import { useEditUser } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-user';
+import { useEditProfile } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-profile';
 import React, { FC } from 'react';
 
 export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
   const { data: user } = useCurrentUser();
-  const { mutate, isLoading, isSuccess } = useEditUser();
+  const { mutate, isLoading, isSuccess } = useEditProfile();
 
   const { handleSubmit, control } = useForm<FormData>({
     defaultValues: {
