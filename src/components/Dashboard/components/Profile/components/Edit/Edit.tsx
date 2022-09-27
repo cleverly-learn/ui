@@ -1,6 +1,5 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import { Box, Button, Grow, TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
 import { Form } from 'components/_common/Html/styled';
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
@@ -8,13 +7,14 @@ import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useEditProfile } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-profile';
+import { useForm } from 'react-hook-form';
 import React, { FC } from 'react';
 
 export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
   const { data: user } = useCurrentUser();
   const { mutate, isLoading } = useEditProfile();
 
-  const { handleSubmit, control } = useForm<FormData>({
+  const { handleSubmit, register } = useForm<FormData>({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
@@ -30,38 +30,29 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
     >
       {isLoading && <BackdropTopProgress />}
       <Box display="flex" mt={2}>
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field }) => (
-            <Grow in={open} timeout={getTransitionTimeout(0)}>
-              <TextField
-                size="small"
-                sx={{ mr: 2 }}
-                label="Прізвище"
-                {...field}
-              />
-            </Grow>
-          )}
-        />
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field }) => (
-            <Grow in={open} timeout={getTransitionTimeout(1)}>
-              <TextField size="small" sx={{ mr: 2 }} label="Імʼя" {...field} />
-            </Grow>
-          )}
-        />
-        <Controller
-          name="patronymic"
-          control={control}
-          render={({ field }) => (
-            <Grow in={open} timeout={getTransitionTimeout(2)}>
-              <TextField size="small" label="По батькові" {...field} />
-            </Grow>
-          )}
-        />
+        <Grow in={open} timeout={getTransitionTimeout(0)}>
+          <TextField
+            size="small"
+            sx={{ mr: 2 }}
+            label="Прізвище"
+            {...register('lastName')}
+          />
+        </Grow>
+        <Grow in={open} timeout={getTransitionTimeout(1)}>
+          <TextField
+            size="small"
+            sx={{ mr: 2 }}
+            label="Імʼя"
+            {...register('firstName')}
+          />
+        </Grow>
+        <Grow in={open} timeout={getTransitionTimeout(2)}>
+          <TextField
+            size="small"
+            label="По батькові"
+            {...register('patronymic')}
+          />
+        </Grow>
       </Box>
       <Footer>
         <Box display="flex">

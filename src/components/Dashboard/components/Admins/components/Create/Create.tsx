@@ -1,16 +1,16 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import { Button, TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
 import { Form } from 'components/_common/Html/styled';
 import { FormData } from 'components/Dashboard/components/Admins/components/Create/types/form-data.interface';
 import { useCreateAdmin } from 'components/Dashboard/components/Admins/components/Create/feature/mutations/use-create-admin';
+import { useForm } from 'react-hook-form';
 import AddIcon from '@mui/icons-material/Add';
 import React, { FC } from 'react';
 
 export const Create: FC = () => {
   const { isLoading, mutate } = useCreateAdmin();
 
-  const { control, handleSubmit, reset } = useForm<FormData>({
+  const { register, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -28,44 +28,30 @@ export const Create: FC = () => {
       )}
     >
       {isLoading && <BackdropTopProgress />}
-      <Controller
-        name="lastName"
-        control={control}
-        render={({ field }) => (
-          <TextField size="small" sx={{ mr: 1 }} label="Прізвище" {...field} />
-        )}
+      <TextField
+        size="small"
+        sx={{ mr: 1 }}
+        label="Прізвище"
+        {...register('lastName')}
       />
-      <Controller
-        name="firstName"
-        control={control}
-        render={({ field }) => (
-          <TextField size="small" sx={{ mr: 1 }} label="Імʼя" {...field} />
-        )}
+      <TextField
+        size="small"
+        sx={{ mr: 1 }}
+        label="Імʼя"
+        {...register('firstName')}
       />
-      <Controller
-        name="patronymic"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            size="small"
-            sx={{ mr: 1 }}
-            label="По батькові"
-            {...field}
-          />
-        )}
+      <TextField
+        size="small"
+        sx={{ mr: 1 }}
+        label="По батькові"
+        {...register('patronymic')}
       />
-      <Controller
-        name="password"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            size="small"
-            type="password"
-            sx={{ mr: 1 }}
-            label="Пароль"
-            {...field}
-          />
-        )}
+      <TextField
+        size="small"
+        type="password"
+        sx={{ mr: 1 }}
+        label="Пароль"
+        {...register('password')}
       />
       <Button type="submit" variant="contained" startIcon={<AddIcon />}>
         Додати адміністратора
