@@ -37,9 +37,6 @@ module.exports = {
     'import/order': OFF,
     'import/no-default-export': ERROR,
 
-    '@typescript-eslint/interface-name-prefix': OFF,
-    '@typescript-eslint/explicit-module-boundary-types': OFF,
-
     'react/function-component-definition': OFF,
     'react/require-default-props': OFF,
     'react/jsx-props-no-spreading': [
