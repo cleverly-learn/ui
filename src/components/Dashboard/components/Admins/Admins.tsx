@@ -28,7 +28,7 @@ export const Admins: FC = () => {
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
-  const { data: user, isLoading: isUserLoading } = useCurrentUser();
+  const { data: user } = useCurrentUser();
   const { data, isLoading: isAdminsLoading } = useAdminsPage({
     size: pageSize,
     page,
@@ -41,8 +41,7 @@ export const Admins: FC = () => {
 
   const [totalRows, setTotalRows] = useState(data?.totalElements ?? 0);
 
-  const isLoading =
-    isUserLoading || isAdminsLoading || isDeleteLoading || isEditLoading;
+  const isLoading = isAdminsLoading || isDeleteLoading || isEditLoading;
 
   useEffect(() => {
     setTotalRows((prevState) => data?.totalElements ?? prevState);

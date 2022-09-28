@@ -5,6 +5,5 @@ export const CURRENT_USER_KEYS = ['currentUser'];
 
 export const useCurrentUser = () =>
   useQuery(CURRENT_USER_KEYS, () => usersApiService.getCurrentUser(), {
-    enabled: Boolean(localStorage.accessToken),
     staleTime: Infinity,
   });
