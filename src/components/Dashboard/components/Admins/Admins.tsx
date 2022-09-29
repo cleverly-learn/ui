@@ -13,7 +13,7 @@ import {
 } from '@mui/x-data-grid';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { User } from 'api/users/types/user.interface';
-import { useAdminsPage } from 'components/Dashboard/components/Admins/feature/queries/use-admins';
+import { useAdminsPage } from 'components/Dashboard/components/Admins/feature/queries/use-admins-page';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useDeleteUser } from 'hooks/mutations/use-delete-user';
 import { useEditAdmin } from 'components/Dashboard/components/Admins/feature/mutations/use-edit-admin';

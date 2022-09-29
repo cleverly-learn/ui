@@ -1,4 +1,4 @@
-import { ADMINS_KEY } from 'components/Dashboard/components/Admins/feature/queries/use-admins';
+import { ADMINS_KEY } from 'components/Dashboard/components/Admins/feature/queries/use-admins-page';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
 

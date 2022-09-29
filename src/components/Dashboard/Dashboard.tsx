@@ -1,5 +1,6 @@
 import { Admins } from 'components/Dashboard/components/Admins/Admins';
 import { Box } from '@mui/material';
+import { Groups } from 'components/Dashboard/components/Groups/Groups';
 import { Header } from 'components/Dashboard/components/Header/Header';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
@@ -41,10 +42,7 @@ const Dashboard: FC = () => {
                 path={Path.LECTURERS}
                 element={<PaperPanel>{Path.LECTURERS}</PaperPanel>}
               />
-              <Route
-                path={Path.GROUPS}
-                element={<PaperPanel>{Path.GROUPS}</PaperPanel>}
-              />
+              <Route path={Path.GROUPS} element={<Groups />} />
               <Route path={Path.ADMINS} element={<Admins />} />
             </Routes>
           </Box>

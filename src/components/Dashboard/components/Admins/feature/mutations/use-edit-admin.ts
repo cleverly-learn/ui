@@ -1,7 +1,7 @@
 import { Page } from 'types/page.interface';
 import { Pageable } from 'types/pageable.interface';
 import { User } from 'api/users/types/user.interface';
-import { getAdminsKeys } from 'components/Dashboard/components/Admins/feature/queries/use-admins';
+import { getAdminsKeys } from 'components/Dashboard/components/Admins/feature/queries/use-admins-page';
 import { isUndefined } from 'utils/is-undefined';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
