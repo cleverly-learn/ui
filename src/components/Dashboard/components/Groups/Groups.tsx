@@ -29,7 +29,7 @@ export const Groups: FC = () => {
 
   return (
     <PaperPanel sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Box display="flex" mb={1}>
+      <Box display="flex" mb={1} justifyContent="end">
         <Button
           variant="contained"
           size="small"
@@ -38,7 +38,7 @@ export const Groups: FC = () => {
           disabled={isSynchronizing}
           onClick={() => synchronize()}
         >
-          Синхронізувати
+          Синхронізувати з schedule.kpi.ua
         </Button>
         <Tooltip title="До списку будуть додані нові групи, якщо такі існують на schedule.kpi.ua">
           <IconButton size="small" disableRipple>
