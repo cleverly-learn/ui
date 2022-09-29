@@ -1,4 +1,5 @@
 import { ADMINS_KEY } from 'components/Dashboard/components/Admins/feature/queries/use-admins-page';
+import { Role } from 'enums/role.enum';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
 
@@ -14,7 +15,7 @@ export function useCreateAdmin() {
     }) =>
       usersApiService.create({
         ...payload,
-        isAdmin: true,
+        role: Role.ADMIN,
         isRegistered: true,
       }),
     {

@@ -17,7 +17,7 @@ interface CreateParams {
   password: string;
   email?: string;
   isRegistered: boolean;
-  isAdmin: boolean;
+  role: Role;
   firstName: string;
   lastName: string;
   patronymic: string;
