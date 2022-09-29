@@ -1,11 +1,12 @@
 import { Box, Button, IconButton, Tooltip } from '@mui/material';
-import { DEFAULT_PAGE_SIZE } from 'components/Dashboard/components/Groups/constants';
+import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import { DataGrid, GridColumns } from '@mui/x-data-grid';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { useGroupsPage } from 'components/Dashboard/components/Groups/feature/queries/use-groups-page';
 import { useSynchronizeGroups } from 'components/Dashboard/components/Groups/feature/mutations/use-synchronize-groups';
+import { useTotalRows } from 'hooks/data-grid/use-total-rows';
 import InfoIcon from '@mui/icons-material/Info';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import SyncIcon from '@mui/icons-material/Sync';
 
 const columns: GridColumns = [
@@ -24,11 +25,7 @@ export const Groups: FC = () => {
   const { mutate: synchronize, isLoading: isSynchronizing } =
     useSynchronizeGroups();
 
-  const [totalRows, setTotalRows] = useState(data?.totalElements ?? 0);
-
-  useEffect(() => {
-    setTotalRows((prevState) => data?.totalElements ?? prevState);
-  }, [data?.totalElements]);
+  const totalRows = useTotalRows(data?.totalElements);
 
   return (
     <PaperPanel sx={{ display: 'flex', flexDirection: 'column' }}>

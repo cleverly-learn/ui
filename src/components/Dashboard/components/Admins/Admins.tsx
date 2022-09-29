@@ -1,7 +1,7 @@
 import * as styles from 'components/Dashboard/components/Admins/styles';
 import { Box } from '@mui/material';
 import { Create } from 'components/Dashboard/components/Admins/components/Create/Create';
-import { DEFAULT_PAGE_SIZE } from 'components/Dashboard/components/Admins/constants';
+import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
   GridActionsCellItem,
@@ -17,10 +17,11 @@ import { useAdminsPage } from 'components/Dashboard/components/Admins/feature/qu
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useDeleteUser } from 'hooks/mutations/use-delete-user';
 import { useEditAdmin } from 'components/Dashboard/components/Admins/feature/mutations/use-edit-admin';
+import { useTotalRows } from 'hooks/data-grid/use-total-rows';
 import CancelIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 
 export const Admins: FC = () => {
@@ -39,13 +40,9 @@ export const Admins: FC = () => {
     size: pageSize,
   });
 
-  const [totalRows, setTotalRows] = useState(data?.totalElements ?? 0);
+  const totalRows = useTotalRows(data?.totalElements);
 
   const isLoading = isAdminsLoading || isDeleteLoading || isEditLoading;
-
-  useEffect(() => {
-    setTotalRows((prevState) => data?.totalElements ?? prevState);
-  }, [data?.totalElements]);
 
   const columns: GridColumns = [
     { field: 'id', headerName: 'ID', width: 70 },
