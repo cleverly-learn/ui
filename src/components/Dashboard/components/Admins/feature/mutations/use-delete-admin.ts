@@ -2,7 +2,7 @@ import { ADMINS_KEY } from 'components/Dashboard/components/Admins/feature/queri
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApiService } from 'api/users/users.api.service';
 
-export function useDeleteUser() {
+export function useDeleteAdmin() {
   const queryClient = useQueryClient();
 
   return useMutation((id: number) => usersApiService.delete(id), {

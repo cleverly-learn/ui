@@ -38,9 +38,9 @@ export const Groups: FC = () => {
           disabled={isSynchronizing}
           onClick={() => synchronize()}
         >
-          Синхронізувати з schedule.kpi.ua
+          Синхронізувати зі schedule.kpi.ua
         </Button>
-        <Tooltip title="До списку будуть додані нові групи, якщо такі існують на schedule.kpi.ua">
+        <Tooltip title="До списку будуть додані лише нові групи, якщо такі існують на schedule.kpi.ua">
           <IconButton size="small" disableRipple>
             <InfoIcon fontSize="small" />
           </IconButton>
