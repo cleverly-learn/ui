@@ -13,5 +13,4 @@ export interface User {
   telegram: string;
   details: string;
   scheduleId?: string;
-  year?: number;
 }

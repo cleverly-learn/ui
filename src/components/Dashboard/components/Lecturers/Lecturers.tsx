@@ -63,7 +63,6 @@ export const Lecturers: FC = () => {
       flex: 1,
       editable: true,
     },
-    { field: 'login', headerName: 'Логін', width: 150 },
     {
       field: 'actions',
       type: 'actions',
