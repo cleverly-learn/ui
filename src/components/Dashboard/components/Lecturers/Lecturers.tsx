@@ -11,12 +11,14 @@ import {
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { User } from 'api/users/types/user.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
+import { useDeleteLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-delete-lecturer';
 import { useEditLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-edit-lecturer';
 import { useExportLecturers } from 'components/Dashboard/components/Lecturers/feature/mutations/use-export-lecturers';
 import { useLecturersPage } from 'components/Dashboard/components/Lecturers/feature/queries/use-lecturers-page';
 import { useSynchronizeLecturers } from 'components/Dashboard/components/Lecturers/feature/mutations/use-synchronize-lecturers';
 import { useTotalRows } from 'hooks/data-grid/use-total-rows';
 import CancelIcon from '@mui/icons-material/Cancel';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import InfoIcon from '@mui/icons-material/Info';
@@ -41,6 +43,8 @@ export const Lecturers: FC = () => {
     useSynchronizeLecturers();
   const { mutate: exportLogins, isLoading: isFileDownloading } =
     useExportLecturers();
+  const { mutate: deleteLecturer, isLoading: isDeleteLoading } =
+    useDeleteLecturer();
 
   const totalRows = useTotalRows(data?.totalElements);
 
@@ -102,6 +106,11 @@ export const Lecturers: FC = () => {
             onClick={() =>
               setRowModesModel({ [id]: { mode: GridRowModes.Edit } })
             }
+          />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={() => deleteLecturer(id)}
           />,
         ];
       },
@@ -175,7 +184,7 @@ export const Lecturers: FC = () => {
         onPageChange={(newPage) => setPage(newPage)}
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        loading={isLecturersLoading || isEditLoading}
+        loading={isLecturersLoading || isEditLoading || isDeleteLoading}
         processRowUpdate={processRowUpdate}
         pagination
       />

@@ -16,6 +16,10 @@ class LecturersApiService extends AuthorizedApiService {
       })
       .then(({ data }) => data);
   }
+
+  delete(id: number): Promise<void> {
+    return this.api.delete(id.toString());
+  }
 }
 
 export const lecturersApiService = new LecturersApiService();
