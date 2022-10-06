@@ -68,6 +68,12 @@ export const Lecturers: FC = () => {
       editable: true,
     },
     {
+      field: 'isRegistered',
+      headerName: 'Зареєстрований',
+      type: 'boolean',
+      width: 150,
+    },
+    {
       field: 'actions',
       type: 'actions',
       headerName: 'Дії',

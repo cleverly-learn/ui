@@ -3,6 +3,10 @@ import { Group } from 'api/groups/types/group.interface';
 import { Page } from 'types/page.interface';
 import { Pageable } from 'types/pageable.interface';
 
+interface GetAllParams extends Pageable {
+  facultyId?: number;
+}
+
 class GroupsApiService extends AuthorizedApiService {
   constructor() {
     super('groups');
@@ -12,7 +16,7 @@ class GroupsApiService extends AuthorizedApiService {
     await this.api.post('sync');
   }
 
-  getAll(params: Pageable): Promise<Page<Group>> {
+  getAll(params?: GetAllParams): Promise<Page<Group>> {
     return this.api.get<Page<Group>>('', { params }).then(({ data }) => data);
   }
 }

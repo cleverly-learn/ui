@@ -46,7 +46,7 @@ class UsersApiService extends AuthorizedApiService {
 
   patch(id: number, payload: PatchParams): Promise<PatchReturn> {
     return this.api
-      .patch<PatchParams>(id.toString(), payload)
+      .patch<PatchReturn>(id.toString(), payload)
       .then(({ data }) => data);
   }
 

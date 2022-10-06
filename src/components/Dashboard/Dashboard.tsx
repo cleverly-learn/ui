@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import { Groups } from 'components/Dashboard/components/Groups/Groups';
 import { Header } from 'components/Dashboard/components/Header/Header';
 import { Lecturers } from 'components/Dashboard/components/Lecturers/Lecturers';
-import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
 import { Profile } from 'components/Dashboard/components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import { Sidebar } from 'components/Dashboard/components/Sidebar/Sidebar';
+import { Students } from 'components/Dashboard/components/Students/Students';
 import React, { FC } from 'react';
 import logo from 'assets/icons/logo.svg';
 
@@ -35,10 +35,7 @@ const Dashboard: FC = () => {
           <Box flex={1}>
             <Routes>
               <Route path={Path.PROFILE} element={<Profile />} />
-              <Route
-                path={Path.STUDENTS}
-                element={<PaperPanel>{Path.STUDENTS}</PaperPanel>}
-              />
+              <Route path={Path.STUDENTS} element={<Students />} />
               <Route path={Path.LECTURERS} element={<Lecturers />} />
               <Route path={Path.GROUPS} element={<Groups />} />
               <Route path={Path.ADMINS} element={<Admins />} />

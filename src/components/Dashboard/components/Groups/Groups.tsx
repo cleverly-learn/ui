@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
-import { DataGrid, GridColumns } from '@mui/x-data-grid';
+import { DataGrid, GridColumns, GridValueGetterParams } from '@mui/x-data-grid';
+import { Faculty } from 'api/faculties/types/faculty.interface';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { useGroupsPage } from 'components/Dashboard/components/Groups/feature/queries/use-groups-page';
 import { useSynchronizeGroups } from 'components/Dashboard/components/Groups/feature/mutations/use-synchronize-groups';
@@ -11,7 +12,12 @@ import SyncIcon from '@mui/icons-material/Sync';
 
 const columns: GridColumns = [
   { field: 'name', headerName: 'Код групи', width: 150 },
-  { field: 'faculty', headerName: 'Факультет', width: 150 },
+  {
+    field: 'faculty',
+    headerName: 'Факультет',
+    width: 150,
+    valueGetter: (params: GridValueGetterParams<Faculty>) => params.value?.name,
+  },
 ];
 
 export const Groups: FC = () => {
