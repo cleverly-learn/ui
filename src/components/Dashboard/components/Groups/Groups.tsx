@@ -18,6 +18,11 @@ const columns: GridColumns = [
     width: 150,
     valueGetter: (params: GridValueGetterParams<Faculty>) => params.value?.name,
   },
+  {
+    field: 'studentsCount',
+    headerName: 'К-ть студентів',
+    width: 150,
+  },
 ];
 
 export const Groups: FC = () => {

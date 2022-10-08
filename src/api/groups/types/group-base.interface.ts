@@ -1,6 +1,6 @@
 import { Faculty } from 'api/faculties/types/faculty.interface';
 
-export interface Group {
+export interface GroupBase {
   id: string;
   scheduleId: string;
   name: string;

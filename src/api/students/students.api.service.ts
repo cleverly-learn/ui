@@ -1,5 +1,5 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
-import { Group } from 'api/groups/types/group.interface';
+import { GroupBase } from 'api/groups/types/group-base.interface';
 import { Page } from 'types/page.interface';
 import { Pageable } from 'types/pageable.interface';
 import { Student } from 'api/students/types/student.interface';
@@ -19,7 +19,7 @@ interface PatchParams {
 }
 interface PatchReturn {
   id: number;
-  group?: Group;
+  group?: GroupBase;
   firstName?: string;
   lastName?: string;
   patronymic?: string;

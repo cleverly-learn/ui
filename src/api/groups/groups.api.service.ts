@@ -1,5 +1,5 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
-import { Group } from 'api/groups/types/group.interface';
+import { GroupPreview } from 'api/groups/types/group-preivew.interface';
 import { Page } from 'types/page.interface';
 import { Pageable } from 'types/pageable.interface';
 
@@ -16,8 +16,10 @@ class GroupsApiService extends AuthorizedApiService {
     await this.api.post('sync');
   }
 
-  getAll(params?: GetAllParams): Promise<Page<Group>> {
-    return this.api.get<Page<Group>>('', { params }).then(({ data }) => data);
+  getAll(params?: GetAllParams): Promise<Page<GroupPreview>> {
+    return this.api
+      .get<Page<GroupPreview>>('', { params })
+      .then(({ data }) => data);
   }
 }
 

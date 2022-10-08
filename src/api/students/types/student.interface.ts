@@ -1,4 +1,4 @@
-import { Group } from 'api/groups/types/group.interface';
+import { GroupBase } from 'api/groups/types/group-base.interface';
 
 export interface Student {
   id: number;
@@ -10,5 +10,5 @@ export interface Student {
   phone: string;
   telegram: string;
   details: string;
-  group: Group;
+  group: GroupBase;
 }
