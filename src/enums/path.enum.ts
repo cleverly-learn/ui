@@ -5,4 +5,6 @@ export enum Path {
   LECTURERS = '/lecturers',
   GROUPS = '/groups',
   ADMINS = '/admins',
+  GROUP = '/group',
+  USER = '/user',
 }

@@ -1,5 +1,6 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
-import { GroupPreview } from 'api/groups/types/group-preivew.interface';
+import { Group } from 'api/groups/types/group.interface';
+import { GroupPreview } from 'api/groups/types/group-preview.interface';
 import { Page } from 'types/page.interface';
 import { Pageable } from 'types/pageable.interface';
 
@@ -20,6 +21,10 @@ class GroupsApiService extends AuthorizedApiService {
     return this.api
       .get<Page<GroupPreview>>('', { params })
       .then(({ data }) => data);
+  }
+
+  get(id: number): Promise<Group> {
+    return this.api.get<Group>(`/${id}`).then(({ data }) => data);
   }
 }
 

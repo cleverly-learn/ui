@@ -11,6 +11,4 @@ const getGroupsKeys = ({ page, size }: Required<Pageable>) => [
 ];
 
 export const useGroupsPage = (pageable: Required<Pageable>) =>
-  useQuery(getGroupsKeys(pageable), () => groupsApiService.getAll(pageable), {
-    staleTime: Infinity,
-  });
+  useQuery(getGroupsKeys(pageable), () => groupsApiService.getAll(pageable));

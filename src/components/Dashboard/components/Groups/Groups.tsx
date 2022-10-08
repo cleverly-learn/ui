@@ -1,8 +1,16 @@
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Link, Tooltip } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
-import { DataGrid, GridColumns, GridValueGetterParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColumns,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from '@mui/x-data-grid';
 import { Faculty } from 'api/faculties/types/faculty.interface';
+import { GroupPreview } from 'api/groups/types/group-preview.interface';
 import { PaperPanel } from 'components/_common/PaperPanel';
+import { Path } from 'enums/path.enum';
+import { Link as RouterLink } from 'react-router-dom';
 import { useGroupsPage } from 'components/Dashboard/components/Groups/feature/queries/use-groups-page';
 import { useSynchronizeGroups } from 'components/Dashboard/components/Groups/feature/mutations/use-synchronize-groups';
 import { useTotalRows } from 'hooks/data-grid/use-total-rows';
@@ -11,7 +19,20 @@ import React, { FC, useState } from 'react';
 import SyncIcon from '@mui/icons-material/Sync';
 
 const columns: GridColumns = [
-  { field: 'name', headerName: 'Код групи', width: 150 },
+  {
+    field: 'name',
+    headerName: 'Код групи',
+    width: 150,
+    renderCell: ({ row }: GridRenderCellParams<number, GroupPreview>) => (
+      <Link
+        component={RouterLink}
+        color="secondary"
+        to={`${Path.GROUP}/${row.id}`}
+      >
+        {row.name}
+      </Link>
+    ),
+  },
   {
     field: 'faculty',
     headerName: 'Факультет',

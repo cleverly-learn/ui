@@ -11,9 +11,9 @@ import {
 } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
+import { getFullName } from 'utils/get-full-name';
 import { isAdmin } from 'enums/role.enum';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
-import { useCurrentUserFullName } from 'hooks/queries/use-current-user-full-name';
 import { useLogout } from 'components/Dashboard/components/Header/feature/mutations/use-logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -23,7 +23,6 @@ export const Header: FC = () => {
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
   const { data: user, isLoading: isUserLoading } = useCurrentUser();
-  const fullName = useCurrentUserFullName();
   const {
     mutate: logout,
     isLoading: isLogoutLoading,
@@ -56,7 +55,7 @@ export const Header: FC = () => {
         endIcon={<AccountCircleIcon />}
         onClick={onClickUser}
       >
-        {fullName ?? <Skeleton variant="text" width={200} />}
+        {user ? getFullName(user) : <Skeleton variant="text" width={200} />}
       </Button>
       <Menu
         open={Boolean(menuAnchor)}
