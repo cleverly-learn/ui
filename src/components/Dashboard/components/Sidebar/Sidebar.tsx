@@ -1,17 +1,18 @@
 import * as styles from 'components/Dashboard/components/Sidebar/styles';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Paper, Tab, Tabs } from '@mui/material';
 import { tabs } from 'components/Dashboard/components/Sidebar/constants';
+import { useTabsValue } from 'components/Dashboard/components/Sidebar/hooks/use-tabs-value';
 import React, { FC } from 'react';
 
 export const Sidebar: FC = () => {
-  const { pathname } = useLocation();
+  const value = useTabsValue(tabs);
 
   return (
     <Paper sx={{ p: 2, height: 1 }}>
       <Tabs
         orientation="vertical"
-        value={pathname}
+        value={value}
         TabIndicatorProps={{
           sx: styles.indicator,
         }}
@@ -28,6 +29,7 @@ export const Sidebar: FC = () => {
             iconPosition="start"
           />
         ))}
+        <Tab value="*" />
       </Tabs>
     </Paper>
   );
