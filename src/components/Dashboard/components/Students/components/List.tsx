@@ -1,3 +1,4 @@
+import { Box, Zoom } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -10,6 +11,8 @@ import {
   GridValueGetterParams,
   GridValueSetterParams,
 } from '@mui/x-data-grid';
+import { PanelFab } from 'components/_common/PanelFab/styled';
+import { PanelProps } from 'components/Dashboard/components/Students/types/panel-props.interface';
 import { Student } from 'api/students/types/student.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
 import { useDeleteStudent } from 'components/Dashboard/components/Students/feature/mutations/use-delete-student';
@@ -18,13 +21,14 @@ import { useFaculties } from 'components/Dashboard/components/Students/feature/q
 import { useGroups } from 'components/Dashboard/components/Students/feature/queries/use-groups';
 import { useStudentsPage } from 'components/Dashboard/components/Students/feature/queries/use-students-page';
 import { useTotalRows } from 'hooks/data-grid/use-total-rows';
+import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import React, { FC, useState } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 
-export const List: FC = () => {
+export const List: FC<PanelProps> = ({ open, onComplete }) => {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
@@ -170,22 +174,31 @@ export const List: FC = () => {
   };
 
   return (
-    <DataGrid
-      paginationMode="server"
-      editMode="row"
-      experimentalFeatures={{ newEditingApi: true }}
-      sx={dataGrid}
-      columns={columns}
-      rows={data?.data ?? []}
-      rowCount={totalRows}
-      rowModesModel={rowModesModel}
-      page={page}
-      onPageChange={(newPage) => setPage(newPage)}
-      pageSize={pageSize}
-      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-      loading={isStudentsLoading || isEditLoading || isDeleteLoading}
-      processRowUpdate={processRowUpdate}
-      pagination
-    />
+    <>
+      <Box mb={7} height={1}>
+        <DataGrid
+          paginationMode="server"
+          editMode="row"
+          experimentalFeatures={{ newEditingApi: true }}
+          sx={dataGrid}
+          columns={columns}
+          rows={data?.data ?? []}
+          rowCount={totalRows}
+          rowModesModel={rowModesModel}
+          page={page}
+          onPageChange={(newPage) => setPage(newPage)}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          loading={isStudentsLoading || isEditLoading || isDeleteLoading}
+          processRowUpdate={processRowUpdate}
+          pagination
+        />
+      </Box>
+      <Zoom timeout={200} in={open}>
+        <PanelFab color="primary" onClick={onComplete}>
+          <AddIcon />
+        </PanelFab>
+      </Zoom>
+    </>
   );
 };

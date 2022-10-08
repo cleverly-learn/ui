@@ -1,6 +1,6 @@
 import { Edit } from 'components/Dashboard/components/Profile/components/Edit/Edit';
 import { PaperPanel } from 'components/_common/PaperPanel';
-import { View } from 'components/Dashboard/components/Profile/components/View/View';
+import { View } from 'components/Dashboard/components/Profile/components/View';
 import React, { FC, useState } from 'react';
 
 export const Profile: FC = () => {

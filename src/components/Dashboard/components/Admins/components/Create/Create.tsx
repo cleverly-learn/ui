@@ -1,6 +1,5 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
-import { Button, TextField } from '@mui/material';
-import { Form } from 'components/_common/Html/styled';
+import { Box, Button, TextField } from '@mui/material';
 import { FormData } from 'components/Dashboard/components/Admins/components/Create/types/form-data.interface';
 import { useCreateAdmin } from 'components/Dashboard/components/Admins/components/Create/feature/mutations/use-create-admin';
 import { useForm } from 'react-hook-form';
@@ -20,8 +19,9 @@ export const Create: FC = () => {
   });
 
   return (
-    <Form
-      sx={{ display: 'flex' }}
+    <Box
+      component="form"
+      display="flex"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit((data) =>
         mutate(data, { onSuccess: () => reset() }),
@@ -56,6 +56,6 @@ export const Create: FC = () => {
       <Button type="submit" variant="contained" startIcon={<AddIcon />}>
         Додати адміністратора
       </Button>
-    </Form>
+    </Box>
   );
 };

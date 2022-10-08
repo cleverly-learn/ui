@@ -1,5 +1,6 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -9,13 +10,12 @@ import {
   TextField,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { Form } from 'components/_common/Html/styled';
 import { FormData } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
 import { schema } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/schema';
 import { useChangePassword } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 
 interface Props {
   open?: boolean;
@@ -53,9 +53,10 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <Form
+      <Box
+        component="form"
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onSubmit={(e) => {
+        onSubmit={(e: FormEvent) => {
           e.stopPropagation();
           return handleSubmit(({ newPassword }) =>
             mutate(newPassword, { onSuccess: closeAndReset }),
@@ -110,7 +111,7 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
             Підтвердити
           </Button>
         </DialogActions>
-      </Form>
+      </Box>
     </Dialog>
   );
 };

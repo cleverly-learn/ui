@@ -1,7 +1,6 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import { Box, Button, Grow, TextField } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
-import { Form } from 'components/_common/Html/styled';
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
@@ -23,8 +22,11 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
   });
 
   return (
-    <Form
-      sx={{ display: 'flex', flexDirection: 'column', height: 1 }}
+    <Box
+      component="form"
+      display="flex"
+      flexDirection="column"
+      height={1}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit((data) => mutate(data, { onSuccess: onComplete }))}
     >
@@ -74,6 +76,6 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
           </Grow>
         </Box>
       </Footer>
-    </Form>
+    </Box>
   );
 };

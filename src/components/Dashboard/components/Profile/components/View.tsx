@@ -1,6 +1,6 @@
-import * as styles from 'components/Dashboard/components/Profile/components/View/styles';
-import { Box, Fab, Grow, Skeleton, Typography, Zoom } from '@mui/material';
+import { Box, Grow, Skeleton, Typography, Zoom } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
+import { PanelFab } from 'components/_common/PanelFab/styled';
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
 import { useCurrentUserFullName } from 'hooks/queries/use-current-user-full-name';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,9 +19,9 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
 
       <Footer>
         <Zoom timeout={200} in={open}>
-          <Fab color="secondary" sx={styles.edit} onClick={onComplete}>
+          <PanelFab color="secondary" onClick={onComplete}>
             <EditIcon />
-          </Fab>
+          </PanelFab>
         </Zoom>
       </Footer>
     </Box>
