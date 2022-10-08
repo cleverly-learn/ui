@@ -1,4 +1,4 @@
-import { Box, Zoom } from '@mui/material';
+import { Box, Fade, Zoom } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -11,6 +11,7 @@ import {
   GridValueGetterParams,
   GridValueSetterParams,
 } from '@mui/x-data-grid';
+import { PAPER_PANEL_FADE_TIMEOUT } from 'components/_common/PaperPanel';
 import { PanelFab } from 'components/_common/PanelFab/styled';
 import { PanelProps } from 'components/Dashboard/components/Students/types/panel-props.interface';
 import { Student } from 'api/students/types/student.interface';
@@ -175,25 +176,27 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
 
   return (
     <>
-      <Box mb={7} height={1}>
-        <DataGrid
-          paginationMode="server"
-          editMode="row"
-          experimentalFeatures={{ newEditingApi: true }}
-          sx={dataGrid}
-          columns={columns}
-          rows={data?.data ?? []}
-          rowCount={totalRows}
-          rowModesModel={rowModesModel}
-          page={page}
-          onPageChange={(newPage) => setPage(newPage)}
-          pageSize={pageSize}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          loading={isStudentsLoading || isEditLoading || isDeleteLoading}
-          processRowUpdate={processRowUpdate}
-          pagination
-        />
-      </Box>
+      <Fade in={open} timeout={PAPER_PANEL_FADE_TIMEOUT}>
+        <Box mb={7} height={1}>
+          <DataGrid
+            paginationMode="server"
+            editMode="row"
+            experimentalFeatures={{ newEditingApi: true }}
+            sx={dataGrid}
+            columns={columns}
+            rows={data?.data ?? []}
+            rowCount={totalRows}
+            rowModesModel={rowModesModel}
+            page={page}
+            onPageChange={(newPage) => setPage(newPage)}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            loading={isStudentsLoading || isEditLoading || isDeleteLoading}
+            processRowUpdate={processRowUpdate}
+            pagination
+          />
+        </Box>
+      </Fade>
       <Zoom timeout={200} in={open}>
         <PanelFab color="primary" onClick={onComplete}>
           <AddIcon />
