@@ -1,4 +1,4 @@
-import { Box, Fade, Link, Zoom } from '@mui/material';
+import { Box, Fade, Zoom } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -12,11 +12,11 @@ import {
   GridValueGetterParams,
   GridValueSetterParams,
 } from '@mui/x-data-grid';
+import { Link } from 'components/_common/Link';
 import { PAPER_PANEL_FADE_TIMEOUT } from 'components/_common/PaperPanel';
 import { PanelFab } from 'components/_common/PanelFab/styled';
 import { PanelProps } from 'components/Dashboard/components/Students/types/panel-props.interface';
 import { Path } from 'enums/path.enum';
-import { Link as RouterLink } from 'react-router-dom';
 import { Student } from 'api/students/types/student.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
 import { useDeleteStudent } from 'components/Dashboard/components/Students/feature/mutations/use-delete-student';
@@ -60,11 +60,7 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.lastName}
         </Link>
       ),
@@ -75,11 +71,7 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.firstName}
         </Link>
       ),
@@ -90,11 +82,7 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.patronymic}
         </Link>
       ),
@@ -113,11 +101,7 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
       valueFormatter: (params: GridValueFormatterParams) =>
         data?.data.find(({ id }) => id === params.id)?.group.name,
       renderCell: ({ row }: GridRenderCellParams<unknown, Student>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.GROUP}/${row.group.id}`}
-        >
+        <Link color="secondary" to={`${Path.GROUP}/${row.group.id}`}>
           {row.group.name}
         </Link>
       ),

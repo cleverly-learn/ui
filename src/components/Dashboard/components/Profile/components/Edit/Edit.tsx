@@ -1,5 +1,5 @@
 import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
-import { Box, Button, Grow, TextField } from '@mui/material';
+import { Box, Button, Grow, InputAdornment, TextField } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
 import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
@@ -18,8 +18,15 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
       firstName: user?.firstName,
       lastName: user?.lastName,
       patronymic: user?.patronymic,
+      telegram: user?.telegram,
+      phone: user?.phone,
+      details: user?.details,
     },
   });
+
+  const onSubmit = handleSubmit(({ phone, ...data }) =>
+    mutate({ ...data, phone: phone || undefined }, { onSuccess: onComplete }),
+  );
 
   return (
     <Box
@@ -28,7 +35,7 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
       flexDirection="column"
       height={1}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={handleSubmit((data) => mutate(data, { onSuccess: onComplete }))}
+      onSubmit={onSubmit}
     >
       {isLoading && <BackdropTopProgress />}
       <Box display="flex" mt={2}>
@@ -56,6 +63,48 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
           />
         </Grow>
       </Box>
+      <Box sx={{ width: 200, display: 'flex', flexDirection: 'column' }}>
+        <Grow in={open} timeout={getTransitionTimeout(1)}>
+          <TextField
+            size="small"
+            label="Телеграм"
+            sx={{ mt: 3 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">@</InputAdornment>
+              ),
+            }}
+            {...register('telegram')}
+          />
+        </Grow>
+        <Grow in={open} timeout={getTransitionTimeout(2)}>
+          <TextField
+            size="small"
+            label="Номер телефону"
+            type="tel"
+            sx={{ mt: 2 }}
+            inputProps={{
+              maxLength: 10,
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">+38</InputAdornment>
+              ),
+            }}
+            {...register('phone')}
+          />
+        </Grow>
+      </Box>
+      <Grow in={open} timeout={getTransitionTimeout(3)}>
+        <TextField
+          size="small"
+          label="Додаткова інформація"
+          sx={{ mt: 2, width: 500 }}
+          multiline
+          rows={4}
+          {...register('details')}
+        />
+      </Grow>
       <Footer>
         <Box display="flex">
           <Grow in={open} timeout={getTransitionTimeout(0)}>

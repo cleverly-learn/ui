@@ -40,6 +40,7 @@ const Dashboard: FC = () => {
             <Route path={Path.GROUPS} element={<Groups />} />
             <Route path={Path.ADMINS} element={<Admins />} />
             <Route path={`${Path.GROUP}/:id`} element={<Group />} />
+            <Route path={`${Path.USER}/:id`} element={<Profile />} />
           </Routes>
         </Box>
       </Box>

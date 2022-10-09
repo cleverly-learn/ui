@@ -46,6 +46,7 @@ module.exports = {
       },
     ],
     'react/jsx-no-useless-fragment': [ERROR, { allowExpressions: true }],
+    'react/jsx-no-duplicate-props': [ERROR, { ignoreCase: false }],
 
     'class-methods-use-this': OFF,
 

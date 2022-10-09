@@ -10,6 +10,9 @@ interface PatchParams {
   lastName?: string;
   patronymic?: string;
   password?: string;
+  telegram?: string;
+  phone?: string;
+  details?: string;
 }
 type PatchReturn = Omit<PatchParams, 'password'>;
 
@@ -30,6 +33,10 @@ interface GetAllParams extends Pageable {
 class UsersApiService extends AuthorizedApiService {
   constructor() {
     super('users');
+  }
+
+  get(id: number): Promise<User> {
+    return this.api.get<User>(id.toString()).then(({ data }) => data);
   }
 
   getCurrentUser(): Promise<User> {

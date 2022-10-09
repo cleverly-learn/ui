@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Link, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -10,9 +10,9 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 import { Lecturer } from 'api/lecturers/types/lecturer.interface';
+import { Link } from 'components/_common/Link';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
-import { Link as RouterLink } from 'react-router-dom';
 import { User } from 'api/users/types/user.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
 import { useDeleteLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-delete-lecturer';
@@ -59,11 +59,7 @@ export const Lecturers: FC = () => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.lastName}
         </Link>
       ),
@@ -74,11 +70,7 @@ export const Lecturers: FC = () => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.firstName}
         </Link>
       ),
@@ -89,11 +81,7 @@ export const Lecturers: FC = () => {
       flex: 1,
       editable: true,
       renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
-        <Link
-          component={RouterLink}
-          color="secondary"
-          to={`${Path.USER}/${row.userId}`}
-        >
+        <Link color="secondary" to={`${Path.USER}/${row.userId}`}>
           {row.patronymic}
         </Link>
       ),

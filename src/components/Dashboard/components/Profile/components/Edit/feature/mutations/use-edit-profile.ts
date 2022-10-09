@@ -7,8 +7,14 @@ export function useEditProfile() {
   const queryClient = useQueryClient();
 
   return useMutation(
-    (payload: { firstName: string; lastName: string; patronymic: string }) =>
-      usersApiService.patchCurrentUser(payload),
+    (payload: {
+      firstName: string;
+      lastName: string;
+      patronymic: string;
+      phone?: string;
+      telegram: string;
+      details: string;
+    }) => usersApiService.patchCurrentUser(payload),
     {
       onSuccess: (patchedValues) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
