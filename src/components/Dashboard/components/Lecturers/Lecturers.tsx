@@ -1,18 +1,22 @@
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Link, Tooltip } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
   GridActionsCellItem,
   GridColumns,
+  GridRenderCellParams,
   GridRowModes,
   GridRowModesModel,
   GridRowParams,
 } from '@mui/x-data-grid';
+import { Lecturer } from 'api/lecturers/types/lecturer.interface';
 import { PaperPanel } from 'components/_common/PaperPanel';
+import { Path } from 'enums/path.enum';
+import { Link as RouterLink } from 'react-router-dom';
 import { User } from 'api/users/types/user.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
 import { useDeleteLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-delete-lecturer';
-import { useEditLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-edit-lecturer';
+import { useEditUser } from 'components/Dashboard/components/Lecturers/feature/mutations/use-edit-user';
 import { useExportLecturers } from 'components/Dashboard/components/Lecturers/feature/mutations/use-export-lecturers';
 import { useLecturersPage } from 'components/Dashboard/components/Lecturers/feature/queries/use-lecturers-page';
 import { useSynchronizeLecturers } from 'components/Dashboard/components/Lecturers/feature/mutations/use-synchronize-lecturers';
@@ -35,7 +39,7 @@ export const Lecturers: FC = () => {
     page,
     size: pageSize,
   });
-  const { mutate: edit, isLoading: isEditLoading } = useEditLecturer({
+  const { mutate: edit, isLoading: isEditLoading } = useEditUser({
     page,
     size: pageSize,
   });
@@ -54,18 +58,45 @@ export const Lecturers: FC = () => {
       headerName: 'Прізвище',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.lastName}
+        </Link>
+      ),
     },
     {
       field: 'firstName',
       headerName: 'Імʼя',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.firstName}
+        </Link>
+      ),
     },
     {
       field: 'patronymic',
       headerName: 'По батькові',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Lecturer>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.patronymic}
+        </Link>
+      ),
     },
     {
       field: 'isRegistered',
@@ -126,11 +157,11 @@ export const Lecturers: FC = () => {
   const processRowUpdate = ({
     password,
     ...newRow
-  }: User & { password?: string }) => {
-    const { id, firstName, lastName, patronymic } = newRow;
+  }: Lecturer & { password?: string }) => {
+    const { userId, firstName, lastName, patronymic } = newRow;
 
     edit({
-      id,
+      id: userId,
       firstName,
       lastName,
       patronymic,

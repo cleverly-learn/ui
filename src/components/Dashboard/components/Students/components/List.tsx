@@ -59,18 +59,45 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
       headerName: 'Прізвище',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.lastName}
+        </Link>
+      ),
     },
     {
       field: 'firstName',
       headerName: 'Імʼя',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.firstName}
+        </Link>
+      ),
     },
     {
       field: 'patronymic',
       headerName: 'По батькові',
       flex: 1,
       editable: true,
+      renderCell: ({ row }: GridRenderCellParams<number, Student>) => (
+        <Link
+          component={RouterLink}
+          color="secondary"
+          to={`${Path.USER}/${row.userId}`}
+        >
+          {row.patronymic}
+        </Link>
+      ),
     },
     {
       field: 'groupId',

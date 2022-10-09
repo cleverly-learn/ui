@@ -1,16 +1,9 @@
+import { GroupBase } from 'api/groups/types/group-base.interface';
 import { Role } from 'enums/role.enum';
+import { UserBase } from 'api/users/types/user-base.interface';
 
-export interface User {
-  id: number;
-  login: string;
-  email: string;
-  isRegistered: boolean;
+export interface User extends UserBase {
   role: Role;
-  firstName: string;
-  lastName: string;
-  patronymic: string;
-  phone: string;
-  telegram: string;
-  details: string;
   scheduleId?: string;
+  group?: GroupBase;
 }

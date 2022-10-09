@@ -1,8 +1,17 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
+import { Lecturer } from 'api/lecturers/types/lecturer.interface';
+import { Page } from 'types/page.interface';
+import { Pageable } from 'types/pageable.interface';
 
 class LecturersApiService extends AuthorizedApiService {
   constructor() {
     super('lecturers');
+  }
+
+  getAll(params?: Pageable): Promise<Page<Lecturer>> {
+    return this.api
+      .get<Page<Lecturer>>('', { params })
+      .then(({ data }) => data);
   }
 
   async synchronize(): Promise<void> {
