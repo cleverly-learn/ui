@@ -127,97 +127,103 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
         </Stepper>
         <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
           {step === RegistrationStep.MAIN && (
-            <>
-              <TextField
-                size="small"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                disabled={isNameDisabled}
-              />
-              <TextField
-                size="small"
-                sx={{ mt: 1 }}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                disabled={isNameDisabled}
-              />
-              <TextField
-                size="small"
-                sx={{ mt: 1 }}
-                value={patronymic}
-                onChange={(e) => setPatronymic(e.target.value)}
-                disabled={isNameDisabled}
-              />
-              <Box mt={3}>
-                <GoogleButton text="Підключити Google" />
+            <Fade in={step === RegistrationStep.MAIN}>
+              <Box display="flex" flexDirection="column" alignItems="center">
+                <TextField
+                  size="small"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  disabled={isNameDisabled}
+                />
+                <TextField
+                  size="small"
+                  sx={{ mt: 1 }}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  disabled={isNameDisabled}
+                />
+                <TextField
+                  size="small"
+                  sx={{ mt: 1 }}
+                  value={patronymic}
+                  onChange={(e) => setPatronymic(e.target.value)}
+                  disabled={isNameDisabled}
+                />
+                <Box mt={3}>
+                  <GoogleButton text="Підключити Google" />
+                </Box>
+                <Alert severity="info" sx={{ mt: 2 }}>
+                  Google буде використовуватися як додатковий спосіб входу у
+                  систему. Також він необхідний для синхронізації курсів Google
+                  Classroom із системою Cleverly
+                </Alert>
               </Box>
-              <Alert severity="info" sx={{ mt: 2 }}>
-                Google буде використовуватися як додатковий спосіб входу у
-                систему. Також він необхідний для синхронізації курсів Google
-                Classroom із системою Cleverly
-              </Alert>
-            </>
+            </Fade>
           )}
           {step === RegistrationStep.ADDITIONAL && (
-            <Box display="flex" flexDirection="column" width={250}>
-              <TextField
-                size="small"
-                label="Телеграм"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">@</InputAdornment>
-                  ),
-                }}
-                value={telegram}
-                onChange={(e) => setTelegram(e.target.value)}
-              />
-              <TextField
-                size="small"
-                label="Номер телефону"
-                type="tel"
-                sx={{ mt: 1 }}
-                inputProps={{
-                  maxLength: 10,
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">+38</InputAdornment>
-                  ),
-                }}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <TextField
-                size="small"
-                label="Додаткова інформація"
-                sx={{ mt: 1 }}
-                multiline
-                rows={4}
-                value={details}
-                onChange={(e) => setDetails(e.target.value)}
-              />
-            </Box>
+            <Fade in={step === RegistrationStep.ADDITIONAL}>
+              <Box display="flex" flexDirection="column" width={250}>
+                <TextField
+                  size="small"
+                  label="Телеграм"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">@</InputAdornment>
+                    ),
+                  }}
+                  value={telegram}
+                  onChange={(e) => setTelegram(e.target.value)}
+                />
+                <TextField
+                  size="small"
+                  label="Номер телефону"
+                  type="tel"
+                  sx={{ mt: 1 }}
+                  inputProps={{
+                    maxLength: 10,
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">+38</InputAdornment>
+                    ),
+                  }}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <TextField
+                  size="small"
+                  label="Додаткова інформація"
+                  sx={{ mt: 1 }}
+                  multiline
+                  rows={4}
+                  value={details}
+                  onChange={(e) => setDetails(e.target.value)}
+                />
+              </Box>
+            </Fade>
           )}
           {step === RegistrationStep.PASSWORD && (
-            <>
-              <TextField
-                size="small"
-                type="password"
-                sx={{ mb: 1 }}
-                label="Новий пароль"
-                error={Boolean(errors.password)}
-                helperText={errors.password?.message}
-                {...register('password')}
-              />
-              <TextField
-                size="small"
-                type="password"
-                label="Повторіть пароль"
-                error={Boolean(errors.repeatPassword)}
-                helperText={errors.repeatPassword?.message}
-                {...register('repeatPassword')}
-              />
-            </>
+            <Fade in={step === RegistrationStep.PASSWORD}>
+              <Box display="flex" flexDirection="column">
+                <TextField
+                  size="small"
+                  type="password"
+                  sx={{ mb: 1 }}
+                  label="Новий пароль"
+                  error={Boolean(errors.password)}
+                  helperText={errors.password?.message}
+                  {...register('password')}
+                />
+                <TextField
+                  size="small"
+                  type="password"
+                  label="Повторіть пароль"
+                  error={Boolean(errors.repeatPassword)}
+                  helperText={errors.repeatPassword?.message}
+                  {...register('repeatPassword')}
+                />
+              </Box>
+            </Fade>
           )}
           {step === RegistrationStep.FINISH && (
             <>
