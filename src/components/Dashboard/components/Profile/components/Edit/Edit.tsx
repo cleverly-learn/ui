@@ -2,7 +2,7 @@ import { BackdropTopProgress } from 'components/_common/BackdropTopProgress';
 import { Box, Button, Grow, InputAdornment, TextField } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
-import { PanelProps } from 'components/Dashboard/components/Profile/types/panel-props.interface';
+import { PanelProps } from 'types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useEditProfile } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-profile';

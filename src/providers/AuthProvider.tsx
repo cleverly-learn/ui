@@ -8,7 +8,7 @@ import { useCurrentUser } from 'hooks/queries/use-current-user';
 import React, { FC, PropsWithChildren } from 'react';
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { isLoading, error } = useCurrentUser();
+  const { isLoading, isSuccess, error } = useCurrentUser();
 
   if (!localStorage.accessToken || isUnauthorized(error as AxiosError)) {
     return <Navigate to={Path.LOGIN} />;
@@ -17,7 +17,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       {isLoading && <TopProgress />}
-      {children}
+      {isSuccess && children}
     </>
   );
 };

@@ -1,4 +1,4 @@
 export interface FormData {
-  newPassword: string;
-  repeatNewPassword: string;
+  password: string;
+  repeatPassword: string;
 }

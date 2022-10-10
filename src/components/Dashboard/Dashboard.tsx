@@ -4,13 +4,13 @@ import { Group } from 'components/Dashboard/components/Group/Group';
 import { Groups } from 'components/Dashboard/components/Groups/Groups';
 import { Header } from 'components/Dashboard/components/Header/Header';
 import { Lecturers } from 'components/Dashboard/components/Lecturers/Lecturers';
+import { Logo } from 'components/_common/Logo';
 import { Path } from 'enums/path.enum';
 import { Profile } from 'components/Dashboard/components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import { Sidebar } from 'components/Dashboard/components/Sidebar/Sidebar';
 import { Students } from 'components/Dashboard/components/Students/Students';
 import React, { FC } from 'react';
-import logo from 'assets/icons/logo.svg';
 
 const Dashboard: FC = () => {
   return (
@@ -22,7 +22,7 @@ const Dashboard: FC = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <img src={logo} alt="logo" />
+          <Logo />
         </Box>
         <Box flex={1}>
           <Header />

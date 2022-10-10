@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/types/form-data.interface';
-import { schema } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/schema';
+import { changePasswordSchema } from 'schemas/change-password.schema';
 import { useChangePassword } from 'components/Dashboard/components/Profile/components/Footer/components/ChangePassword/feature/mutations/use-change-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,10 +24,10 @@ interface Props {
 
 export const ChangePassword: FC<Props> = ({ open, onClose }) => {
   const { control, handleSubmit, reset } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(changePasswordSchema),
     defaultValues: {
-      newPassword: '',
-      repeatNewPassword: '',
+      password: '',
+      repeatPassword: '',
     },
   });
   const { mutate, isLoading } = useChangePassword();
@@ -58,7 +58,7 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={(e: FormEvent) => {
           e.stopPropagation();
-          return handleSubmit(({ newPassword }) =>
+          return handleSubmit(({ password: newPassword }) =>
             mutate(newPassword, { onSuccess: closeAndReset }),
           )(e);
         }}
@@ -72,7 +72,7 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
           }}
         >
           <Controller
-            name="newPassword"
+            name="password"
             control={control}
             render={({ field, fieldState }) => (
               <TextField
@@ -87,7 +87,7 @@ export const ChangePassword: FC<Props> = ({ open, onClose }) => {
             )}
           />
           <Controller
-            name="repeatNewPassword"
+            name="repeatPassword"
             control={control}
             render={({ field, fieldState }) => (
               <TextField

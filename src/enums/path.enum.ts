@@ -1,5 +1,6 @@
 export enum Path {
   LOGIN = '/login',
+  ONBOARDING = '/onboarding',
   PROFILE = '/profile',
   STUDENTS = '/students',
   LECTURERS = '/lecturers',

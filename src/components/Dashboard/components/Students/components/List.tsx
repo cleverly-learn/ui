@@ -15,7 +15,7 @@ import {
 import { Link } from 'components/_common/Link';
 import { PAPER_PANEL_FADE_TIMEOUT } from 'components/_common/PaperPanel';
 import { PanelFab } from 'components/_common/PanelFab/styled';
-import { PanelProps } from 'components/Dashboard/components/Students/types/panel-props.interface';
+import { PanelProps } from 'types/panel-props.interface';
 import { Path } from 'enums/path.enum';
 import { Student } from 'api/students/types/student.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';

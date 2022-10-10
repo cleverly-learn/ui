@@ -1,16 +1,11 @@
 import { AxiosError } from 'axios';
-import {
-  Box,
-  Button,
-  FormHelperText,
-  Paper,
-  TextField,
-  Zoom,
-} from '@mui/material';
+import { Box, Button, FormHelperText, TextField, Zoom } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
 import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
+import { Logo } from 'components/_common/Logo';
 import { Navigate } from 'react-router-dom';
+import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
 import { TopProgress } from 'components/_common/TopProgress';
 import { isUnauthorized } from 'utils/http/is-unauthorized';
@@ -18,7 +13,6 @@ import { schema } from 'components/Login/schema';
 import { useLogin } from 'components/Login/feature/mutations/use-login';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
-import logo from 'assets/icons/logo.svg';
 
 const Login: FC = () => {
   const { mutate, isLoading, isSuccess, isError, error } = useLogin();
@@ -39,12 +33,9 @@ const Login: FC = () => {
       {isLoading && <TopProgress />}
       <Box mx="auto" mt="15%" width={300}>
         <Box display="flex" width={1} mx="auto" mb={2} justifyContent="center">
-          <img src={logo} alt="logo" />
+          <Logo />
         </Box>
-        <Paper
-          // elevation={0}
-          sx={{ py: 3, px: 6, display: 'flex', flexDirection: 'column' }}
-        >
+        <PaperPanel sx={{ px: 2, display: 'flex', flexDirection: 'column' }}>
           {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit((data) => mutate(data))}>
             <Controller
@@ -97,7 +88,7 @@ const Login: FC = () => {
           <Box mt={3}>
             <GoogleButton text="Увійти через Google" disabled={isLoading} />
           </Box>
-        </Paper>
+        </PaperPanel>
       </Box>
     </div>
   );

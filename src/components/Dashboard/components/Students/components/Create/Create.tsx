@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Dashboard/components/Students/components/Create/types/form-data.interface';
-import { PanelProps } from 'components/Dashboard/components/Students/types/panel-props.interface';
+import { PanelProps } from 'types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { schema } from 'components/Dashboard/components/Students/components/Create/schema';
 import { useCreateStudent } from 'components/Dashboard/components/Students/components/Create/feature/mutations/use-create-student';
