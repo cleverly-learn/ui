@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { Box, Button, FormHelperText, TextField, Zoom } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
-import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
+import { GoogleLogin } from '@react-oauth/google';
 import { Logo } from 'components/_common/Logo';
 import { Navigate } from 'react-router-dom';
 import { PaperPanel } from 'components/_common/PaperPanel';
@@ -35,7 +35,14 @@ const Login: FC = () => {
         <Box display="flex" width={1} mx="auto" mb={2} justifyContent="center">
           <Logo />
         </Box>
-        <PaperPanel sx={{ px: 2, display: 'flex', flexDirection: 'column' }}>
+        <PaperPanel
+          sx={{
+            px: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form onSubmit={handleSubmit((data) => mutate(data))}>
             <Controller
@@ -86,7 +93,7 @@ const Login: FC = () => {
             )}
           </form>
           <Box mt={3}>
-            <GoogleButton text="Увійти через Google" disabled={isLoading} />
+            <GoogleLogin text="signin_with" onSuccess={() => {}} />
           </Box>
         </PaperPanel>
       </Box>

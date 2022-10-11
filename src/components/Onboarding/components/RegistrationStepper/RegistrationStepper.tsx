@@ -13,18 +13,21 @@ import {
   Typography,
   Zoom,
 } from '@mui/material';
-import { GoogleButton } from 'components/_common/GoogleButton/GoogleButton';
 import { PanelProps } from 'types/panel-props.interface';
 import { Path } from 'enums/path.enum';
+import { Scope } from 'enums/scope.enum';
 import { changePasswordSchema } from 'schemas/change-password.schema';
-import { isStudent } from 'enums/role.enum';
+import { isLecturer, isStudent } from 'enums/role.enum';
 import { isUndefined } from 'utils/is-undefined';
 import { useCompleteRegistration } from 'components/Onboarding/components/RegistrationStepper/feature/mutations/use-complete-registration';
+import { useConnectGoogle } from 'components/Onboarding/components/RegistrationStepper/feature/mutations/use-connect-google';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useForm } from 'react-hook-form';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CheckIcon from '@mui/icons-material/Check';
+import GoogleIcon from '@mui/icons-material/Google';
 import React, { FC, useState } from 'react';
 
 enum RegistrationStep {
@@ -42,8 +45,11 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
     isSuccess: isCompleted,
   } = useCompleteRegistration();
   const { data: user } = useCurrentUser();
+  const { mutate: connectGoogle, isLoading: isGoogleConnecting } =
+    useConnectGoogle();
 
   const [step, setStep] = React.useState(RegistrationStep.MAIN);
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
   const [firstName, setFirstName] = useState(user?.firstName ?? '');
   const [lastName, setLastName] = useState(user?.lastName ?? '');
   const [patronymic, setPatronymic] = useState(user?.patronymic ?? '');
@@ -93,6 +99,13 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
       { onSuccess: onComplete },
     );
     setStep(RegistrationStep.FINISH);
+  });
+
+  const login = useGoogleLogin({
+    onSuccess: ({ code }) =>
+      connectGoogle(code, { onSuccess: () => setIsNextDisabled(false) }),
+    flow: 'auth-code',
+    scope: user && isLecturer(user.role) ? Scope.CLASSROOM : undefined,
   });
 
   return (
@@ -150,12 +163,25 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
                   disabled={isNameDisabled}
                 />
                 <Box mt={3}>
-                  <GoogleButton text="Підключити Google" />
+                  <Button
+                    variant="contained"
+                    disabled={!isNextDisabled}
+                    onClick={() => login()}
+                    endIcon={<GoogleIcon />}
+                  >
+                    Підключити Google
+                  </Button>
+                  <Zoom in={isGoogleConnecting}>
+                    <CircularProgress
+                      sx={{ position: 'absolute', my: 1, ml: 1 }}
+                      size={24}
+                    />
+                  </Zoom>
                 </Box>
                 <Alert severity="info" sx={{ mt: 2 }}>
-                  Google буде використовуватися як додатковий спосіб входу у
-                  систему. Також він необхідний для синхронізації курсів Google
-                  Classroom із системою Cleverly
+                  Google необхідний для синхронізації курсів Google Classroom із
+                  системою Cleverly. Також він буде використовуватися як
+                  додатковий спосіб входу у систему.
                 </Alert>
               </Box>
             </Fade>
@@ -274,6 +300,8 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
           )}
           {step !== RegistrationStep.FINISH && (
             <Button
+              variant="contained"
+              disabled={isNextDisabled}
               type={step === RegistrationStep.PASSWORD ? 'submit' : 'button'}
               sx={{ ml: 'auto' }}
               onClick={() => setTimeout(goNext)}

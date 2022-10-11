@@ -15,7 +15,7 @@ export function useCompleteRegistration() {
       telegram: string;
       details: string;
       password: string;
-    }) => usersApiService.patchCurrentUser(payload),
+    }) => usersApiService.patchCurrentUser({ ...payload, isRegistered: true }),
     {
       onSuccess: (patchedValues) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises

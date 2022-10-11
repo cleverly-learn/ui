@@ -13,6 +13,7 @@ interface PatchParams {
   telegram?: string;
   phone?: string;
   details?: string;
+  isRegistered?: boolean;
 }
 type PatchReturn = Omit<PatchParams, 'password'>;
 
@@ -63,6 +64,12 @@ class UsersApiService extends AuthorizedApiService {
 
   delete(id: number): Promise<void> {
     return this.api.delete(id.toString());
+  }
+
+  connectGoogle(code: string): Promise<string> {
+    return this.api
+      .post<string>('me/google', { code })
+      .then(({ data }) => data);
   }
 }
 
