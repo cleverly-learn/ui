@@ -10,7 +10,7 @@ import {
 import { Link as MuiRouterLink } from 'components/_common/Link';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
-import { SCHEDULE_KPI } from 'constants/env';
+import { SCHEDULE_KPI_URL } from 'constants/env';
 import { getFullName } from 'utils/get-full-name';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { isUndefined } from 'utils/is-undefined';
@@ -37,7 +37,7 @@ export const Group: FC = () => {
             {group?.name ?? <Skeleton variant="text" width="40%" />}
           </Typography>
           <MuiLink
-            href={`${SCHEDULE_KPI}?groupId=${group?.scheduleId ?? ''}`}
+            href={`${SCHEDULE_KPI_URL}?groupId=${group?.scheduleId ?? ''}`}
             target="_blank"
             color="secondary"
             display="flex"

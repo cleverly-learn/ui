@@ -8,4 +8,5 @@ export enum Path {
   ADMINS = '/admins',
   GROUP = '/group',
   USER = '/user',
+  COURSES = '/courses',
 }

@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 
 export interface TabProps {
-  to: string;
+  to?: string;
+  href?: string;
   label: string;
   icon?: ReactElement;
 }
