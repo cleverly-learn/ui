@@ -54,3 +54,26 @@ export const getLecturerTabs = (scheduleId: string): TabProps[] => [
     icon: createElement(TodayIcon),
   },
 ];
+
+export const getStudentTabs = (scheduleId: string): TabProps[] => [
+  {
+    to: Path.PROFILE,
+    label: 'Профіль',
+    icon: createElement(PersonIcon),
+  },
+  {
+    to: Path.COURSES,
+    label: 'Мої курси',
+    icon: createElement(SchoolIcon),
+  },
+  {
+    to: Path.GROUP,
+    label: 'Моя група',
+    icon: createElement(PeopleAltIcon),
+  },
+  {
+    href: `${SCHEDULE_KPI_URL}?groupId=${scheduleId}`,
+    label: 'Розклад',
+    icon: createElement(TodayIcon),
+  },
+];

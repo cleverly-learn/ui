@@ -3,6 +3,7 @@ import { TabProps } from 'components/Dashboard/components/Sidebar/types/tab-prop
 import {
   adminTabs,
   getLecturerTabs,
+  getStudentTabs,
 } from 'components/Dashboard/components/Sidebar/constants';
 import { isUndefined } from 'utils/is-undefined';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
@@ -20,6 +21,7 @@ export function useTabs(): TabProps[] {
     case Role.LECTURER:
       return getLecturerTabs(user.scheduleId);
     case Role.STUDENT:
+      return getStudentTabs(user.scheduleId);
     default:
       return [];
   }
