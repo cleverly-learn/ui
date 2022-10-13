@@ -11,7 +11,7 @@ import { useCurrentUser } from 'hooks/queries/use-current-user';
 export function useTabs(): TabProps[] {
   const { data: user } = useCurrentUser();
 
-  if (isUndefined(user) || isUndefined(user.scheduleId)) {
+  if (isUndefined(user)) {
     return [];
   }
 
@@ -19,9 +19,9 @@ export function useTabs(): TabProps[] {
     case Role.ADMIN:
       return adminTabs;
     case Role.LECTURER:
-      return getLecturerTabs(user.scheduleId);
+      return getLecturerTabs(user.scheduleId ?? '');
     case Role.STUDENT:
-      return getStudentTabs(user.scheduleId);
+      return getStudentTabs(user.scheduleId ?? '');
     default:
       return [];
   }

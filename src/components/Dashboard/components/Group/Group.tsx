@@ -17,7 +17,7 @@ import { isUndefined } from 'utils/is-undefined';
 import { useGroup } from 'components/Dashboard/components/Group/feature/queries/use-group';
 import { useParams } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 export const Group: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -86,7 +86,7 @@ export const Group: FC = () => {
             py={0.5}
           >
             {group?.students.map((student, index, arr) => (
-              <>
+              <Fragment key={student.id}>
                 <Box display="flex" p={1.5}>
                   <Typography mr={2} color={theme.palette.text.disabled}>
                     {index + 1}
@@ -96,7 +96,7 @@ export const Group: FC = () => {
                   </MuiRouterLink>
                 </Box>
                 {index !== arr.length - 1 && <Divider />}
-              </>
+              </Fragment>
             ))}
           </Box>
         </div>
