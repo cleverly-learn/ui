@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  Fab,
   Fade,
   InputAdornment,
   Step,
@@ -16,6 +15,7 @@ import {
 import { PanelProps } from 'types/panel-props.interface';
 import { Path } from 'enums/path.enum';
 import { Scope } from 'enums/scope.enum';
+import { SuccessableProgress } from 'components/_common/SuccessableProgress';
 import { changePasswordSchema } from 'schemas/change-password.schema';
 import { isLecturer, isStudent } from 'enums/role.enum';
 import { isUndefined } from 'utils/is-undefined';
@@ -26,7 +26,6 @@ import { useForm } from 'react-hook-form';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CheckIcon from '@mui/icons-material/Check';
 import GoogleIcon from '@mui/icons-material/Google';
 import React, { FC, useState } from 'react';
 
@@ -253,31 +252,11 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
           )}
           {step === RegistrationStep.FINISH && (
             <>
-              <Box mt={4} position="relative" onClick={onFinish}>
-                <Zoom in={isCompleted} timeout={500}>
-                  <Fab
-                    color="primary"
-                    disabled={isCompleting}
-                    sx={{
-                      width: 150,
-                      height: 150,
-                    }}
-                  >
-                    <CheckIcon sx={{ fontSize: 150 }} />
-                  </Fab>
-                </Zoom>
-                {isCompleting && (
-                  <CircularProgress
-                    size={130}
-                    sx={(theme) => ({
-                      color: theme.palette.primary.main,
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                    })}
-                  />
-                )}
-              </Box>
+              <SuccessableProgress
+                onClickSuccess={onFinish}
+                isLoading={isCompleting}
+                isSuccess={isCompleted}
+              />
               <Button
                 variant="contained"
                 sx={{ mt: 8 }}

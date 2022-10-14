@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -11,10 +11,10 @@ import { GroupPreview } from 'api/groups/types/group-preview.interface';
 import { Link } from 'components/_common/Link';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
+import { TipIcon } from 'components/_common/TipIcon';
 import { useGroupsPage } from 'components/Dashboard/components/Groups/feature/queries/use-groups-page';
 import { useSynchronizeGroups } from 'components/Dashboard/components/Groups/feature/mutations/use-synchronize-groups';
 import { useTotalRows } from 'hooks/data-grid/use-total-rows';
-import InfoIcon from '@mui/icons-material/Info';
 import React, { FC, useState } from 'react';
 import SyncIcon from '@mui/icons-material/Sync';
 
@@ -68,11 +68,7 @@ export const Groups: FC = () => {
         >
           Синхронізувати зі schedule.kpi.ua
         </Button>
-        <Tooltip title="До списку будуть додані лише нові групи, якщо такі існують на schedule.kpi.ua">
-          <IconButton size="small" disableRipple>
-            <InfoIcon fontSize="small" />
-          </IconButton>
-        </Tooltip>
+        <TipIcon text="До списку будуть додані лише нові групи, якщо такі існують на schedule.kpi.ua" />
       </Box>
       <DataGrid
         density="compact"

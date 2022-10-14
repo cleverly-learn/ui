@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DEFAULT_PAGE_SIZE } from 'constants/data-grid';
 import {
   DataGrid,
@@ -13,6 +13,7 @@ import { Lecturer } from 'api/lecturers/types/lecturer.interface';
 import { Link } from 'components/_common/Link';
 import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
+import { TipIcon } from 'components/_common/TipIcon';
 import { User } from 'api/users/types/user.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
 import { useDeleteLecturer } from 'components/Dashboard/components/Lecturers/feature/mutations/use-delete-lecturer';
@@ -25,7 +26,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import InfoIcon from '@mui/icons-material/Info';
 import React, { FC, useState } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import SyncIcon from '@mui/icons-material/Sync';
@@ -172,11 +172,7 @@ export const Lecturers: FC = () => {
           >
             Експортувати паролі в Excel
           </Button>
-          <Tooltip title="Будуть експортовані логіни та паролі викладачів, які ще не зареєструвалися в системі">
-            <IconButton size="small" disableRipple>
-              <InfoIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+          <TipIcon text="Будуть експортовані логіни та паролі викладачів, які ще не зареєструвалися в системі" />
         </Box>
         <Box>
           <Button
@@ -189,11 +185,7 @@ export const Lecturers: FC = () => {
           >
             Синхронізувати зі schedule.kpi.ua
           </Button>
-          <Tooltip title="До списку будуть додані лише нові викладачі, якщо такі існують на schedule.kpi.ua">
-            <IconButton size="small" disableRipple>
-              <InfoIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+          <TipIcon text="До списку будуть додані лише нові викладачі, якщо такі існують на schedule.kpi.ua" />
         </Box>
       </Box>
       <DataGrid

@@ -1,5 +1,6 @@
 import { Admins } from 'components/Dashboard/components/Admins/Admins';
 import { Box } from '@mui/material';
+import { Courses } from 'components/Dashboard/components/Courses/Courses';
 import { Group } from 'components/Dashboard/components/Group/Group';
 import { Groups } from 'components/Dashboard/components/Groups/Groups';
 import { Header } from 'components/Dashboard/components/Header/Header';
@@ -41,6 +42,7 @@ const Dashboard: FC = () => {
             <Route path={Path.ADMINS} element={<Admins />} />
             <Route path={`${Path.GROUP}/:id`} element={<Group />} />
             <Route path={`${Path.USER}/:id`} element={<Profile />} />
+            <Route path={Path.COURSES} element={<Courses />} />
           </Routes>
         </Box>
       </Box>

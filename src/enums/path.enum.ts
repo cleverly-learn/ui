@@ -9,4 +9,5 @@ export enum Path {
   GROUP = '/group',
   USER = '/user',
   COURSES = '/courses',
+  COURSE = '/course',
 }

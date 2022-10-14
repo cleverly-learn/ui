@@ -1,18 +1,15 @@
 import {
   Box,
-  Chip,
   Grow,
   Link as MuiLink,
   Skeleton,
   Typography,
   Zoom,
-  useTheme,
 } from '@mui/material';
 import { Footer } from 'components/Dashboard/components/Profile/components/Footer/Footer';
-import { Link } from 'components/_common/Link';
+import { GroupChip } from 'components/_common/GroupChip';
 import { PanelFab } from 'components/_common/PanelFab/styled';
 import { PanelProps } from 'types/panel-props.interface';
-import { Path } from 'enums/path.enum';
 import { getFullName } from 'utils/get-full-name';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { isStudent } from 'enums/role.enum';
@@ -27,7 +24,6 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
   const { id } = useParams<{ id: string }>();
   const { data: currentUser } = useCurrentUser();
   const { data: idUser } = useUser(id ? +id : 0);
-  const theme = useTheme();
 
   const user = isUndefined(id) ? currentUser : idUser;
 
@@ -38,21 +34,7 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
           <Typography variant="h3" mr={2}>
             {user ? getFullName(user) : <Skeleton variant="text" width={400} />}
           </Typography>
-          {user?.group && (
-            <Chip
-              color="secondary"
-              sx={{ mt: 1 }}
-              label={
-                <Link
-                  color={theme.palette.secondary.contrastText}
-                  underline="hover"
-                  to={`${Path.GROUP}/${user.group.id}`}
-                >
-                  {user.group.name}
-                </Link>
-              }
-            />
-          )}
+          {user?.group && <GroupChip sx={{ mt: 1 }} group={user.group} />}
         </Box>
       </Grow>
       <Grow in={open} timeout={getTransitionTimeout(1)}>

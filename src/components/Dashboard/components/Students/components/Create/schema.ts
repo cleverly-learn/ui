@@ -16,6 +16,6 @@ export const schema: yup.SchemaOf<FormData> = yup.object({
       .email('Неправильний формат пошти')
       .required('Пошта не може бути пуста'),
   }),
-  facultyId: yup.number().required('Факультет має бути вибраним'),
-  groupId: yup.number().required('Група має бути вибрана'),
+  facultyId: yup.number().typeError('Необхідно вибрати факультет').required(),
+  groupId: yup.number().typeError('Необхідно вибрати групу').required(),
 });
