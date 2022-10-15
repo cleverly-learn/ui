@@ -1,5 +1,5 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
-import { Course } from 'api/courses/types/course';
+import { CoursePreview } from 'api/courses/types/course-preview.interface';
 
 class CoursesApiService extends AuthorizedApiService {
   constructor() {
@@ -10,8 +10,12 @@ class CoursesApiService extends AuthorizedApiService {
     name: string;
     groupsIds: number[];
     withClassroom: boolean;
-  }): Promise<Course> {
-    return this.api.post<Course>('', payload).then(({ data }) => data);
+  }): Promise<CoursePreview> {
+    return this.api.post<CoursePreview>('', payload).then(({ data }) => data);
+  }
+
+  async inviteStudents(courseId: number): Promise<void> {
+    await this.api.post(`${courseId}/invite`);
   }
 }
 

@@ -121,7 +121,11 @@ export const Create: FC<PanelProps> = ({ open, onComplete }) => {
                 error={Boolean(error)}
               >
                 <InputLabel>Факультет</InputLabel>
-                <Select label="Факультет" {...field}>
+                <Select
+                  label="Факультет"
+                  MenuProps={{ PaperProps: { sx: { maxHeight: 250 } } }}
+                  {...field}
+                >
                   {(faculties ?? []).map(({ id, name }) => (
                     <MenuItem key={id} value={id}>
                       {name}
@@ -147,7 +151,11 @@ export const Create: FC<PanelProps> = ({ open, onComplete }) => {
                 error={Boolean(error)}
               >
                 <InputLabel>Група</InputLabel>
-                <Select label="Група" {...field}>
+                <Select
+                  label="Група"
+                  MenuProps={{ PaperProps: { sx: { maxHeight: 250 } } }}
+                  {...field}
+                >
                   {(groups ?? []).map(({ id, name }) => (
                     <MenuItem key={id} value={id}>
                       {name}

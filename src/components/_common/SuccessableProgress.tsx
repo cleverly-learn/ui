@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Fab, Zoom } from '@mui/material';
+import { isUndefined } from 'utils/is-undefined';
 import CheckIcon from '@mui/icons-material/Check';
 import React, { FC } from 'react';
 
@@ -14,11 +15,13 @@ export const SuccessableProgress: FC<Props> = ({
   onClickSuccess,
 }) => {
   return (
-    <Box mt={4} position="relative" onClick={onClickSuccess}>
+    <Box mt={4} position="relative">
       <Zoom in={isSuccess} timeout={500}>
         <Fab
           color="primary"
           disabled={isLoading}
+          onClick={onClickSuccess}
+          disableRipple={isUndefined(onClickSuccess)}
           sx={{
             width: 150,
             height: 150,
