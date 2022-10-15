@@ -19,10 +19,11 @@ import { PanelProps } from 'types/panel-props.interface';
 import { Path } from 'enums/path.enum';
 import { Student } from 'api/students/types/student.interface';
 import { dataGrid, dataGridClasses } from 'components/_common/DataGrid/styles';
+import { isNotUndefined } from 'utils/is-not-undefined';
 import { useDeleteStudent } from 'components/Dashboard/components/Students/feature/mutations/use-delete-student';
 import { useEditStudent } from 'components/Dashboard/components/Students/feature/mutations/use-edit-student';
-import { useFaculties } from 'components/Dashboard/components/Students/feature/queries/use-faculties';
-import { useGroups } from 'components/Dashboard/components/Students/feature/queries/use-groups';
+import { useFaculties } from 'hooks/queries/use-faculties';
+import { useGroups } from 'hooks/queries/use-groups';
 import { useStudentsPage } from 'components/Dashboard/components/Students/feature/queries/use-students-page';
 import { useTotalRows } from 'hooks/data-grid/use-total-rows';
 import AddIcon from '@mui/icons-material/Add';
@@ -48,7 +49,9 @@ export const List: FC<PanelProps> = ({ open, onComplete }) => {
   });
   const { mutate: deleteStudent, isLoading: isDeleteLoading } =
     useDeleteStudent();
-  const { data: faculties } = useFaculties();
+  const { data: faculties } = useFaculties({
+    enabled: isNotUndefined(facultyId),
+  });
   const { data: groups } = useGroups({ facultyId });
 
   const totalRows = useTotalRows(data?.totalElements);

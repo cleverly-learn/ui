@@ -18,8 +18,8 @@ import { PanelProps } from 'types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
 import { schema } from 'components/Dashboard/components/Students/components/Create/schema';
 import { useCreateStudent } from 'components/Dashboard/components/Students/components/Create/feature/mutations/use-create-student';
-import { useFaculties } from 'components/Dashboard/components/Students/feature/queries/use-faculties';
-import { useGroups } from 'components/Dashboard/components/Students/feature/queries/use-groups';
+import { useFaculties } from 'hooks/queries/use-faculties';
+import { useGroups } from 'hooks/queries/use-groups';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
 
@@ -43,7 +43,9 @@ export const Create: FC<PanelProps> = ({ open, onComplete }) => {
     resolver: yupResolver(schema),
   });
 
-  const { data: faculties, isLoading: isFacultiesLoading } = useFaculties();
+  const { data: faculties, isLoading: isFacultiesLoading } = useFaculties({
+    enabled: open,
+  });
   const facultyId = +watch('facultyId');
   const { data: groups, isLoading: isGroupsLoading } = useGroups({
     facultyId,

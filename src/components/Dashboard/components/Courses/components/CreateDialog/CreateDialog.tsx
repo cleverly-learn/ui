@@ -26,8 +26,8 @@ import { TipIcon } from 'components/_common/TipIcon';
 import { isUndefined } from 'utils/is-undefined';
 import { schema } from 'components/Dashboard/components/Courses/components/CreateDialog/schema';
 import { useCreateCourse } from 'components/Dashboard/components/Courses/components/CreateDialog/feature/mutations/use-create-course';
-import { useFaculties } from 'components/Dashboard/components/Students/feature/queries/use-faculties';
-import { useGroups } from 'components/Dashboard/components/Students/feature/queries/use-groups';
+import { useFaculties } from 'hooks/queries/use-faculties';
+import { useGroups } from 'hooks/queries/use-groups';
 import { useInviteStudents } from 'components/Dashboard/components/Courses/components/CreateDialog/feature/mutations/use-invite-students';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -58,7 +58,9 @@ export const CreateDialog: FC<Props> = ({ open, onClose }) => {
     resolver: yupResolver(schema),
   });
 
-  const { data: faculties, isLoading: isFacultiesLoading } = useFaculties();
+  const { data: faculties, isLoading: isFacultiesLoading } = useFaculties({
+    enabled: open,
+  });
   const facultyId = +watch('facultyId');
   const { data: groups, isLoading: isGroupsLoading } = useGroups({
     facultyId,

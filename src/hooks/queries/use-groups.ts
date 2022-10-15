@@ -3,7 +3,7 @@ import { isNotUndefined } from 'utils/is-not-undefined';
 import { isPositive } from 'utils/number/is-positive';
 import { useQuery } from '@tanstack/react-query';
 
-const GROUPS_KEY = 'students_groups';
+export const GROUPS_KEY = 'groups';
 
 const getGroupsKeys = ({ facultyId }: { facultyId?: number }) => [
   GROUPS_KEY,

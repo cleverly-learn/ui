@@ -1,4 +1,4 @@
-import { GROUPS_KEY } from 'components/Dashboard/components/Groups/feature/queries/use-groups-page';
+import { GROUPS_KEY } from 'hooks/queries/use-groups';
 import { groupsApiService } from 'api/groups/groups.api.service';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
