@@ -1,4 +1,5 @@
 import { AuthorizedApiService } from 'api/authorized-api.service';
+import { Course } from 'api/courses/types/course.interface';
 import { CoursePreview } from 'api/courses/types/course-preview.interface';
 
 class CoursesApiService extends AuthorizedApiService {
@@ -20,6 +21,10 @@ class CoursesApiService extends AuthorizedApiService {
 
   getAll(): Promise<CoursePreview[]> {
     return this.api.get<CoursePreview[]>('').then(({ data }) => data);
+  }
+
+  get(id: number): Promise<Course> {
+    return this.api.get<Course>(id.toString()).then(({ data }) => data);
   }
 }
 
