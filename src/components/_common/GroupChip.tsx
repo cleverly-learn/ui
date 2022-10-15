@@ -1,34 +1,46 @@
 import { Chip, ChipProps } from '@mui/material';
-import { Link } from 'components/_common/Link';
+import { Link } from 'react-router-dom';
 import { Path } from 'enums/path.enum';
-import React, { FC } from 'react';
+import React, {
+  FC,
+  MouseEvent,
+  MouseEventHandler,
+  SyntheticEvent,
+} from 'react';
 
-interface Props extends Omit<ChipProps, 'label' | 'color'> {
+interface Props extends Pick<ChipProps, 'sx' | 'onDelete'> {
   group: {
     id: number;
     name: string;
   };
   newTab?: boolean;
+  onMouseDown?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export const GroupChip: FC<Props> = ({
   group: { id, name },
   newTab,
+  onMouseDown,
+  onDelete,
   ...chipProps
 }) => {
   return (
     <Chip
+      component={Link}
       color="secondary"
-      label={
-        <Link
-          color="secondary.contrastText"
-          underline="hover"
-          to={`${Path.GROUP}/${id}`}
-          target={newTab ? '_blank' : undefined}
-        >
-          {name}
-        </Link>
+      to={`${Path.GROUP}/${id}`}
+      target={newTab ? '_blank' : undefined}
+      label={name}
+      clickable
+      onDelete={
+        onDelete
+          ? (e: SyntheticEvent) => {
+              e.preventDefault();
+              onDelete(e);
+            }
+          : undefined
       }
+      onMouseDown={(e: MouseEvent<HTMLAnchorElement>) => onMouseDown?.(e)}
       {...chipProps}
     />
   );

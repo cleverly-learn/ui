@@ -91,7 +91,10 @@ export const Group: FC = () => {
                   <Typography mr={2} color={theme.palette.text.disabled}>
                     {index + 1}
                   </Typography>
-                  <MuiRouterLink color="secondary" to={`${Path.USER}/0`}>
+                  <MuiRouterLink
+                    color="secondary"
+                    to={`${Path.USER}/${student.userId}`}
+                  >
                     {getFullName(student)}
                   </MuiRouterLink>
                 </Box>
