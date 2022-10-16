@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { Box, Button, FormHelperText, TextField, Zoom } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Login/types/form-data.interface';
-import { GoogleLogin } from '@react-oauth/google';
 import { Logo } from 'components/_common/Logo';
 import { Navigate } from 'react-router-dom';
 import { PaperPanel } from 'components/_common/PaperPanel';
@@ -92,9 +91,6 @@ const Login: FC = () => {
               </Zoom>
             )}
           </form>
-          <Box mt={3}>
-            <GoogleLogin text="signin_with" onSuccess={() => {}} />
-          </Box>
         </PaperPanel>
       </Box>
     </div>
