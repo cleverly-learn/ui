@@ -42,6 +42,7 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
     mutate: complete,
     isLoading: isCompleting,
     isSuccess: isCompleted,
+    isError: isCompletingError,
   } = useCompleteRegistration();
   const { data: user } = useCurrentUser();
   const { mutate: connectGoogle, isLoading: isGoogleConnecting } =
@@ -91,7 +92,7 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
         lastName,
         patronymic,
         telegram,
-        phone,
+        phone: phone || undefined,
         details,
         password,
       },
@@ -260,7 +261,7 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
               <Button
                 variant="contained"
                 sx={{ mt: 8 }}
-                disabled={isCompleting}
+                disabled={isCompleting || isCompletingError}
                 onClick={onFinish}
               >
                 Завершити
