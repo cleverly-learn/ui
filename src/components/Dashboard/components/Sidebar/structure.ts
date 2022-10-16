@@ -1,7 +1,10 @@
 import { Path } from 'enums/path.enum';
-import { SCHEDULE_KPI_URL } from 'constants/env';
 import { TabProps } from 'components/Dashboard/components/Sidebar/types/tab-props.interface';
 import { createElement } from 'react';
+import {
+  getGroupScheduleUrl,
+  getLecturerScheduleUrl,
+} from 'utils/schedule-url';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -49,7 +52,7 @@ export const getLecturerTabs = (scheduleId: string): TabProps[] => [
     icon: createElement(SchoolIcon),
   },
   {
-    href: `${SCHEDULE_KPI_URL}/lecturers?lecturerId=${scheduleId}`,
+    href: getLecturerScheduleUrl(scheduleId),
     label: 'Розклад',
     icon: createElement(TodayIcon),
   },
@@ -75,7 +78,7 @@ export const getStudentTabs = (
     icon: createElement(PeopleAltIcon),
   },
   {
-    href: `${SCHEDULE_KPI_URL}?groupId=${scheduleId}`,
+    href: getGroupScheduleUrl(scheduleId),
     label: 'Розклад',
     icon: createElement(TodayIcon),
   },

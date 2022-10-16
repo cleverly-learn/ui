@@ -4,7 +4,7 @@ import {
   adminTabs,
   getLecturerTabs,
   getStudentTabs,
-} from 'components/Dashboard/components/Sidebar/constants';
+} from 'components/Dashboard/components/Sidebar/structure';
 import { isUndefined } from 'utils/is-undefined';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 
