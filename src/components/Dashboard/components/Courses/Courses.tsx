@@ -44,14 +44,14 @@ export const Courses: FC = () => {
       {isStudent(user.role) && !courses.length && <EmptyListStudentTitle />}
       {isLecturer(user.role) && (
         <>
-          {!courses.length && (
+          {courses.length === 0 && (
             <EmptyListLecturerCta onClick={() => setIsCreating(true)} />
           )}
           <CreateDialog
             open={isCreating}
             onClose={() => setIsCreating(false)}
           />
-          {courses.length && (
+          {courses.length > 0 && (
             <PanelFab color="primary" onClick={() => setIsCreating(true)}>
               <AddIcon />
             </PanelFab>
