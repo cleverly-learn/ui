@@ -19,8 +19,13 @@ class CoursesApiService extends AuthorizedApiService {
     await this.api.post(`${courseId}/invite`);
   }
 
-  getAll(): Promise<CoursePreview[]> {
-    return this.api.get<CoursePreview[]>('').then(({ data }) => data);
+  getAll(params: {
+    ownerUserId?: number;
+    studentUserId?: number;
+  }): Promise<CoursePreview[]> {
+    return this.api
+      .get<CoursePreview[]>('', { params })
+      .then(({ data }) => data);
   }
 
   get(id: number): Promise<Course> {
