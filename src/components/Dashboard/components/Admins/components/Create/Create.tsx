@@ -27,7 +27,7 @@ export const Create: FC = () => {
         mutate(data, { onSuccess: () => reset() }),
       )}
     >
-      {isLoading && <BackdropTopProgress />}
+      <BackdropTopProgress open={isLoading} />
       <TextField
         size="small"
         sx={{ mr: 1 }}

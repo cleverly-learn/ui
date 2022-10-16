@@ -4,6 +4,8 @@ import { Footer } from 'components/Dashboard/components/Profile/components/Foote
 import { FormData } from 'components/Dashboard/components/Profile/components/Edit/types/form-data.interface';
 import { PanelProps } from 'types/panel-props.interface';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
+import { isNotUndefined } from 'utils/is-not-undefined';
+import { isStudent } from 'enums/role.enum';
 import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useEditProfile } from 'components/Dashboard/components/Profile/components/Edit/feature/mutations/use-edit-profile';
 import { useForm } from 'react-hook-form';
@@ -37,13 +39,14 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={onSubmit}
     >
-      {isLoading && <BackdropTopProgress />}
+      <BackdropTopProgress open={isLoading} />
       <Box display="flex" mt={2}>
         <Grow in={open} timeout={getTransitionTimeout(0)}>
           <TextField
             size="small"
             sx={{ mr: 2 }}
             label="Прізвище"
+            disabled={isNotUndefined(user) && isStudent(user.role)}
             {...register('lastName')}
           />
         </Grow>
@@ -52,6 +55,7 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
             size="small"
             sx={{ mr: 2 }}
             label="Імʼя"
+            disabled={isNotUndefined(user) && isStudent(user.role)}
             {...register('firstName')}
           />
         </Grow>
@@ -59,6 +63,7 @@ export const Edit: FC<PanelProps> = ({ open, onComplete }) => {
           <TextField
             size="small"
             label="По батькові"
+            disabled={isNotUndefined(user) && isStudent(user.role)}
             {...register('patronymic')}
           />
         </Grow>

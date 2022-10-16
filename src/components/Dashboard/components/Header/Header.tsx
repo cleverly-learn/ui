@@ -17,10 +17,11 @@ import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useLogout } from 'components/Dashboard/components/Header/feature/mutations/use-logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import React, { FC, MouseEvent, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 
 export const Header: FC = () => {
-  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const accountButton = useRef<HTMLButtonElement>(null);
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const { data: user, isLoading: isUserLoading } = useCurrentUser();
   const {
@@ -28,14 +29,6 @@ export const Header: FC = () => {
     isLoading: isLogoutLoading,
     isSuccess: isLogoutSuccess,
   } = useLogout();
-
-  const onClickUser = (event: MouseEvent<HTMLButtonElement>) => {
-    setMenuAnchor(event.currentTarget);
-  };
-
-  const onCloseMenu = () => {
-    setMenuAnchor(null);
-  };
 
   if (isLogoutSuccess) {
     return <Navigate to={Path.LOGIN} />;
@@ -48,28 +41,31 @@ export const Header: FC = () => {
         <Chip color="secondary" variant="outlined" label="Адміністратор" />
       )}
       <Button
+        ref={accountButton}
         variant="contained"
         size="large"
         disabled={isUserLoading}
         sx={{ ml: 'auto' }}
         endIcon={<AccountCircleIcon />}
-        onClick={onClickUser}
+        onClick={() => setIsMenuOpened(true)}
       >
         {user ? getFullName(user) : <Skeleton variant="text" width={200} />}
       </Button>
       <Menu
-        open={Boolean(menuAnchor)}
-        anchorEl={menuAnchor}
-        onClose={onCloseMenu}
+        open={Boolean(isMenuOpened)}
+        anchorEl={accountButton.current}
+        onClose={() => setIsMenuOpened(false)}
         anchorOrigin={{
-          horizontal: 'right',
+          horizontal: 'center',
           vertical: 'bottom',
         }}
         transformOrigin={{
-          horizontal: 'right',
+          horizontal: 'center',
           vertical: 'top',
         }}
-        PaperProps={{ sx: { mt: 0.5 } }}
+        PaperProps={{
+          sx: { mt: 0.5, width: accountButton.current?.offsetWidth },
+        }}
       >
         <MenuItem onClick={() => logout()}>
           <ListItemIcon>

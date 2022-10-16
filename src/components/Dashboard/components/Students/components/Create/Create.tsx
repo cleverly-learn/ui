@@ -79,7 +79,7 @@ export const Create: FC<PanelProps> = ({ open, onComplete }) => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={onSubmit}
     >
-      {isCreating && <BackdropTopProgress open={isCreating} />}
+      <BackdropTopProgress open={isCreating} />
       <Grow in={open} timeout={getTransitionTimeout(0)}>
         <TextField
           size="small"

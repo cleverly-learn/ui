@@ -26,6 +26,10 @@ class CoursesApiService extends AuthorizedApiService {
   get(id: number): Promise<Course> {
     return this.api.get<Course>(id.toString()).then(({ data }) => data);
   }
+
+  delete(id: number): Promise<void> {
+    return this.api.delete(id.toString());
+  }
 }
 
 export const coursesApiService = new CoursesApiService();

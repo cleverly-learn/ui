@@ -20,6 +20,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { FormData } from 'components/Dashboard/components/Courses/components/CreateDialog/types/form-data.interface';
 import { GroupChip } from 'components/_common/GroupChip';
+import { NavigationState } from 'components/Dashboard/components/Courses/components/CreateDialog/types/navigation-state.interface';
 import { Path } from 'enums/path.enum';
 import { SuccessableProgress } from 'components/_common/SuccessableProgress';
 import { TipIcon } from 'components/_common/TipIcon';
@@ -28,7 +29,7 @@ import { schema } from 'components/Dashboard/components/Courses/components/Creat
 import { useCreateCourse } from 'components/Dashboard/components/Courses/components/CreateDialog/feature/mutations/use-create-course';
 import { useFaculties } from 'hooks/queries/use-faculties';
 import { useGroups } from 'hooks/queries/use-groups';
-import { useInviteStudents } from 'components/Dashboard/components/Courses/components/CreateDialog/feature/mutations/use-invite-students';
+import { useInviteStudents } from 'hooks/queries/use-invite-students';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CloseIcon from '@mui/icons-material/Close';
@@ -91,7 +92,9 @@ export const CreateDialog: FC<Props> = ({ open, onClose }) => {
     if (isClassroomConnected) {
       invite(course.id);
     }
-    navigate(`${Path.COURSE}/${course?.id}`);
+    navigate(`${Path.COURSE}/${course?.id}`, {
+      state: { isInvited: isClassroomConnected } as NavigationState,
+    });
   };
 
   const onSubmit = handleSubmit(({ name, groupsIds, withClassroom }) => {
