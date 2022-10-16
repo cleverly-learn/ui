@@ -143,15 +143,15 @@ export const RegistrationStepper: FC<PanelProps> = ({ open, onComplete }) => {
               <Box display="flex" flexDirection="column" alignItems="center">
                 <TextField
                   size="small"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  sx={{ mt: 1 }}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   disabled={isNameDisabled}
                 />
                 <TextField
                   size="small"
-                  sx={{ mt: 1 }}
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   disabled={isNameDisabled}
                 />
                 <TextField
