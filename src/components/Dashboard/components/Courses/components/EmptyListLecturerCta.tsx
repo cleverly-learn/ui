@@ -5,7 +5,7 @@ interface Props {
   onClick(): void;
 }
 
-export const EmptyListCta: FC<Props> = ({ onClick }) => {
+export const EmptyListLecturerCta: FC<Props> = ({ onClick }) => {
   return (
     <Box height={1} display="flex">
       <Box

@@ -2,11 +2,12 @@ import { CreateDialog } from 'components/Dashboard/components/Courses/components
 import { PanelFab } from 'components/_common/PanelFab/styled';
 
 import { CourseCard } from 'components/Dashboard/components/Courses/components/CourseCard/CourseCard';
-import { EmptyListCta } from 'components/Dashboard/components/Courses/components/EmptyListCta';
+import { EmptyListLecturerCta } from 'components/Dashboard/components/Courses/components/EmptyListLecturerCta';
+import { EmptyListStudentTitle } from 'components/Dashboard/components/Courses/components/EmptyListStudentTitle';
 import { Grid, Grow } from '@mui/material';
 import { ListSkeleton } from 'components/Dashboard/components/Courses/components/ListSkeleton';
 import { User } from 'api/users/types/user.interface';
-import { isLecturer } from 'enums/role.enum';
+import { isLecturer, isStudent } from 'enums/role.enum';
 import { isNotUndefined } from 'utils/is-not-undefined';
 import { isUndefined } from 'utils/is-undefined';
 import { useCourses } from 'components/Dashboard/components/Courses/feature/queries/use-courses';
@@ -25,7 +26,7 @@ export const Courses: FC = () => {
     isNotUndefined(user) ? getParams(user) : {},
   );
 
-  if (isUndefined(courses)) {
+  if (isUndefined(courses) || isUndefined(user)) {
     return <ListSkeleton />;
   }
 
@@ -40,12 +41,22 @@ export const Courses: FC = () => {
           </Grow>
         ))}
       </Grid>
-      {!courses.length && <EmptyListCta onClick={() => setIsCreating(true)} />}
-      <CreateDialog open={isCreating} onClose={() => setIsCreating(false)} />
-      {courses.length && (
-        <PanelFab color="primary" onClick={() => setIsCreating(true)}>
-          <AddIcon />
-        </PanelFab>
+      {isStudent(user.role) && !courses.length && <EmptyListStudentTitle />}
+      {isLecturer(user.role) && (
+        <>
+          {!courses.length && (
+            <EmptyListLecturerCta onClick={() => setIsCreating(true)} />
+          )}
+          <CreateDialog
+            open={isCreating}
+            onClose={() => setIsCreating(false)}
+          />
+          {courses.length && (
+            <PanelFab color="primary" onClick={() => setIsCreating(true)}>
+              <AddIcon />
+            </PanelFab>
+          )}
+        </>
       )}
     </>
   );

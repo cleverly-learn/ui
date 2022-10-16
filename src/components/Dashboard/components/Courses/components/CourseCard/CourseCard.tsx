@@ -5,6 +5,10 @@ import { CoursePreview } from 'api/courses/types/course-preview.interface';
 import { GroupChip } from 'components/_common/GroupChip';
 import { Link } from 'components/_common/Link';
 import { Path } from 'enums/path.enum';
+import { getFullName } from 'utils/get-full-name';
+import { isStudent } from 'enums/role.enum';
+import { isUndefined } from 'utils/is-undefined';
+import { useCurrentUser } from 'hooks/queries/use-current-user';
 import React, { FC } from 'react';
 
 interface Props {
@@ -12,6 +16,12 @@ interface Props {
 }
 
 export const CourseCard: FC<Props> = ({ course }) => {
+  const { data: user } = useCurrentUser();
+
+  if (isUndefined(user)) {
+    return null;
+  }
+
   return (
     <Box sx={styles.card}>
       <Link
@@ -23,6 +33,16 @@ export const CourseCard: FC<Props> = ({ course }) => {
       >
         {course.name}
       </Link>
+      {isStudent(user.role) && (
+        <Link
+          underline="hover"
+          color="primary.contrastText"
+          to={`${Path.USER}/${user.id}`}
+          mt={1}
+        >
+          {getFullName(course.owner)}
+        </Link>
+      )}
       <Box display="flex" mt={2}>
         {course.classroomLink && (
           <Box display="flex" height="min-content">

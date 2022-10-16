@@ -23,9 +23,11 @@ import { PaperPanel } from 'components/_common/PaperPanel';
 import { Path } from 'enums/path.enum';
 import { getFullName } from 'utils/get-full-name';
 import { getTransitionTimeout } from 'components/Dashboard/components/Profile/utils/get-transition-timeout';
+import { isLecturer, isStudent } from 'enums/role.enum';
 import { isNotUndefined } from 'utils/is-not-undefined';
 import { isUndefined } from 'utils/is-undefined';
 import { useCourse } from 'components/Dashboard/components/Course/feature/queries/use-course';
+import { useCurrentUser } from 'hooks/queries/use-current-user';
 import { useDeleteCourse } from 'components/Dashboard/components/Course/feature/mutations/use-delete-course';
 import { useInviteStudents } from 'hooks/queries/use-invite-students';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -46,11 +48,12 @@ export const Course: FC = () => {
     Boolean((state as NavigationState)?.isInvited),
   );
 
+  const { data: user } = useCurrentUser();
   const { data: course } = useCourse(id ? +id : 0);
   const { mutate: deleteCourse, isLoading: isDeleting } = useDeleteCourse();
   const { mutate: inviteStudents } = useInviteStudents();
 
-  if (isUndefined(id)) {
+  if (isUndefined(id) || isUndefined(user)) {
     return null;
   }
 
@@ -85,39 +88,68 @@ export const Course: FC = () => {
       </Grow>
       <Grow in timeout={getTransitionTimeout(1)}>
         <div>
-          <Typography mb={2}>Групи</Typography>
-          {course?.groups.map((group) => (
-            <Accordion key={group.id} sx={styles.accordion}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          {isStudent(user.role) && (
+            <Typography mt={3} display="flex">
+              Викладач:{' '}
+              {course ? (
                 <Link
                   color="secondary"
                   underline="hover"
-                  to={`${Path.GROUP}/${group.id}`}
+                  to={`${Path.USER}/${course.owner.id}`}
+                  ml={0.5}
                 >
-                  {group.name}
+                  {getFullName(course.owner)}
                 </Link>
-              </AccordionSummary>
-              <AccordionDetails>
-                {group.students.map((student, index, arr) => (
-                  <Fragment key={student.userId}>
-                    <Box display="flex">
-                      <Typography color="text.disabled" mr={2}>
-                        {index + 1}
-                      </Typography>
+              ) : (
+                <Skeleton variant="text" width={40} sx={{ ml: 0.5 }} />
+              )}
+            </Typography>
+          )}
+          {isLecturer(user.role) && (
+            <>
+              <Typography mb={2}>Групи</Typography>
+              {course?.groups.map((group, i) => (
+                <Grow
+                  key={group.id}
+                  in
+                  timeout={getTransitionTimeout(1) + i * 50}
+                >
+                  <Accordion sx={styles.accordion}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                       <Link
                         color="secondary"
                         underline="hover"
-                        to={`${Path.USER}/${student.userId}`}
+                        to={`${Path.GROUP}/${group.id}`}
                       >
-                        {getFullName(student)}
+                        {group.name}
                       </Link>
-                    </Box>
-                    {index !== arr.length - 1 && <Divider sx={{ my: 2 }} />}
-                  </Fragment>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          ))}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {group.students.map((student, index, arr) => (
+                        <Fragment key={student.userId}>
+                          <Box display="flex">
+                            <Typography color="text.disabled" mr={2}>
+                              {index + 1}
+                            </Typography>
+                            <Link
+                              color="secondary"
+                              underline="hover"
+                              to={`${Path.USER}/${student.userId}`}
+                            >
+                              {getFullName(student)}
+                            </Link>
+                          </Box>
+                          {index !== arr.length - 1 && (
+                            <Divider sx={{ my: 2 }} />
+                          )}
+                        </Fragment>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                </Grow>
+              ))}
+            </>
+          )}
         </div>
       </Grow>
       {isNotUndefined(course) && (
