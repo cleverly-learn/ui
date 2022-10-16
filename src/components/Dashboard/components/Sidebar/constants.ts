@@ -55,7 +55,10 @@ export const getLecturerTabs = (scheduleId: string): TabProps[] => [
   },
 ];
 
-export const getStudentTabs = (scheduleId: string): TabProps[] => [
+export const getStudentTabs = (
+  scheduleId: string,
+  groupId: number,
+): TabProps[] => [
   {
     to: Path.PROFILE,
     label: 'Профіль',
@@ -67,7 +70,7 @@ export const getStudentTabs = (scheduleId: string): TabProps[] => [
     icon: createElement(SchoolIcon),
   },
   {
-    to: Path.GROUP,
+    to: `${Path.GROUP}/${groupId}`,
     label: 'Моя група',
     icon: createElement(PeopleAltIcon),
   },

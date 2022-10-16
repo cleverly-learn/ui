@@ -21,7 +21,7 @@ export function useTabs(): TabProps[] {
     case Role.LECTURER:
       return getLecturerTabs(user.scheduleId ?? '');
     case Role.STUDENT:
-      return getStudentTabs(user.scheduleId ?? '');
+      return getStudentTabs(user.scheduleId ?? '', user.group?.id ?? 0);
     default:
       return [];
   }
