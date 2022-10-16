@@ -71,7 +71,7 @@ export const Course: FC = () => {
       <Grow in timeout={getTransitionTimeout(0)}>
         <Box display="flex" alignItems="baseline" mb={3}>
           <Typography variant="h3" mr={2}>
-            {course?.name ?? <Skeleton variant="text" width="40%" />}
+            {course?.name ?? <Skeleton variant="text" width={650} />}
           </Typography>
           {course?.classroomLink && (
             <ClassroomChip href={course?.classroomLink} />
@@ -101,7 +101,7 @@ export const Course: FC = () => {
                   {getFullName(course.owner)}
                 </Link>
               ) : (
-                <Skeleton variant="text" width={40} sx={{ ml: 0.5 }} />
+                <Skeleton variant="text" width={200} sx={{ ml: 0.5 }} />
               )}
             </Typography>
           )}

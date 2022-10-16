@@ -34,7 +34,7 @@ export const Group: FC = () => {
       <Grow in timeout={getTransitionTimeout(0)}>
         <div>
           <Typography variant="h3">
-            {group?.name ?? <Skeleton variant="text" width="40%" />}
+            {group?.name ?? <Skeleton variant="text" width={120} />}
           </Typography>
           <MuiLink
             href={`${SCHEDULE_KPI_URL}?groupId=${group?.scheduleId ?? ''}`}
