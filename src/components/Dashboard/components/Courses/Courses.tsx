@@ -34,7 +34,7 @@ export const Courses: FC = () => {
     <>
       <Grid container spacing={2.5}>
         {courses.map((course, index) => (
-          <Grow key={course.id} timeout={50 * index} in>
+          <Grow key={course.id} timeout={300 + 50 * index} in>
             <Grid item md={4}>
               <CourseCard course={course} />
             </Grid>
