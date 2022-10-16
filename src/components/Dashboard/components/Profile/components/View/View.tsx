@@ -36,9 +36,9 @@ export const View: FC<PanelProps> = ({ open, onComplete }) => {
             </Typography>
             {user?.group && <GroupChip sx={{ mt: 1 }} group={user.group} />}
           </Box>
-          {user && isLecturer(user.role) && (
+          {idUser && isLecturer(idUser.role) && (
             <Link
-              href={getLecturerScheduleUrl(user.scheduleId ?? '')}
+              href={getLecturerScheduleUrl(idUser.scheduleId ?? '')}
               target="_blank"
               color="secondary"
               display="flex"

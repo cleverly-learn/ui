@@ -37,7 +37,7 @@ export const CourseCard: FC<Props> = ({ course }) => {
         <Link
           underline="hover"
           color="primary.contrastText"
-          to={`${Path.USER}/${user.id}`}
+          to={`${Path.USER}/${course.owner.id}`}
           mt={1}
         >
           {getFullName(course.owner)}
