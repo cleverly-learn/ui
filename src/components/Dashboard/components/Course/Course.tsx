@@ -152,7 +152,7 @@ export const Course: FC = () => {
           )}
         </div>
       </Grow>
-      {isNotUndefined(course) && (
+      {isNotUndefined(course) && isLecturer(user.role) && (
         <Menu
           open={Boolean(menuAnchor)}
           anchorEl={menuAnchor}
